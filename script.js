@@ -36,6 +36,7 @@ cards.forEach((card, index) => {
 });
 
 
+
 /* ============================================================
    sorta.js — scripts for sorta.html
 ============================================================ */
@@ -89,3 +90,10 @@ window.addEventListener("scroll", () => {
     });
   
   }
+
+  // ── IMAGE DROPDOWN ──
+document.querySelectorAll(".dropdown-trigger").forEach(trigger => {
+  trigger.addEventListener("click", () => {
+    trigger.closest(".image-dropdown").classList.toggle("open");
+  });
+});
