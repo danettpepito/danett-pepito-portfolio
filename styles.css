@@ -379,6 +379,35 @@ footer .foot-right a:hover { color: var(--dark); }
   outline-offset: 4px;
 }
 
+/* CURSOR - "Open Project" */
+.cursor-label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.75rem;
+  background: black;
+  color: white;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.15s ease;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+/* CASE STUDY LINK */
+.case-study {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+
+  text-decoration: none;
+  color: inherit;
+}
+
 /* ── Divider ── */
 .divider {
     height: 1.5px;
