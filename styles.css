@@ -765,7 +765,7 @@ footer .foot-right a:hover { color: var(--dark); }
   }
   
   .cs-about-text {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #5e5e5a;
     line-height: 1.75;
   }
@@ -845,7 +845,7 @@ footer .foot-right a:hover { color: var(--dark); }
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding-bottom: 120px;
+    padding-bottom: 35px;
   }
   
   .cs-scroll-img {
@@ -875,9 +875,10 @@ footer .foot-right a:hover { color: var(--dark); }
   }
   .cs-fullbleed img {
     width: 100%;
-    height: 100vh;
+    height: 80vh;
     object-fit: cover;
     display: block;
+    opacity: 0.5;
   }
   .cs-fullbleed-overlay {
     position: absolute;
@@ -940,7 +941,7 @@ footer .foot-right a:hover { color: var(--dark); }
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 32px;
-    margin: 48px 0;
+    margin: 30px 0;
     padding: 40px;
     background: white;
     border: 1.5px solid #dbd8d2;
@@ -1175,6 +1176,92 @@ footer .foot-right a:hover { color: var(--dark); }
     opacity: 1;
     transform: translateY(0);
   }
+  
+
+
+/* ─────────────────────────────
+   FLOATING CASE STUDY NAV
+──────────────────────────── */
+
+.cs-floating-nav {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+
+  display: flex;
+  gap: 10px;
+
+  padding: 10px;
+  background: rgba(255,255,255,0.82);
+
+  backdrop-filter: blur(14px);
+
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: 999px;
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+
+  z-index: 999;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+/* visible state */
+.cs-floating-nav.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* nav buttons */
+.cs-floating-nav a {
+  padding: 10px 16px;
+
+  border-radius: 999px;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  color: var(--dark);
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* hover */
+.cs-floating-nav a:hover {
+  background: var(--dark);
+  color: white;
+
+  transform: translateY(-1px);
+}
+
+/* mobile */
+@media (max-width: 900px) {
+  .cs-floating-nav {
+    width: calc(100% - 24px);
+
+    overflow-x: auto;
+
+    justify-content: flex-start;
+
+    padding: 10px 12px;
+  }
+
+  .cs-floating-nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
   
   /* ── RESPONSIVE ── */
   @media (max-width: 960px) {

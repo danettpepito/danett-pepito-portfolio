@@ -97,3 +97,18 @@ document.querySelectorAll(".dropdown-trigger").forEach(trigger => {
     trigger.closest(".image-dropdown").classList.toggle("open");
   });
 });
+
+// ── TABLE OF CONTENTS ACTIVE STATE ──
+const floatingNav = document.getElementById("floatingNav");
+const stickyInfo = document.querySelector(".cs-left");
+
+window.addEventListener("scroll", () => {
+  const triggerPoint =
+    stickyInfo.offsetTop + stickyInfo.offsetHeight;
+
+  if (window.scrollY > triggerPoint - 200) {
+    floatingNav.classList.add("show");
+  } else {
+    floatingNav.classList.remove("show");
+  }
+});
