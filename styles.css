@@ -1198,7 +1198,7 @@ footer .foot-right a:hover { color: var(--dark); }
   backdrop-filter: blur(14px);
 
   border: 1.5px solid rgba(0,0,0,0.08);
-  border-radius: 999px;
+  border-radius: 3px;
 
   box-shadow: 0 10px 40px rgba(0,0,0,0.08);
 
@@ -1223,7 +1223,7 @@ footer .foot-right a:hover { color: var(--dark); }
 .cs-floating-nav a {
   padding: 10px 16px;
 
-  border-radius: 999px;
+  border-radius: 3px;
 
   font-size: 0.8rem;
   font-weight: 600;
