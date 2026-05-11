@@ -353,27 +353,27 @@ footer .foot-right a:hover { color: var(--dark); }
 
 
 /* ── WONKY IMAGE HOVER ── */
+/* default tilted state stays the same */
 .case-study-image {
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.4s ease,
-              outline 0.4s ease;
-  cursor: pointer;
+  transform: translateZ(0);
+  transition: transform 0.18s ease-out;
+  will-change: transform;
 }
 
-/* Each card gets a slightly different tilt */
 .case-study:nth-child(1) .case-study-image {
   transform: rotate(-1deg) scale(0.97);
 }
+
 .case-study:nth-child(2) .case-study-image {
   transform: rotate(1deg) scale(0.97);
 }
+
 .case-study:nth-child(3) .case-study-image {
   transform: rotate(-1deg) scale(0.97);
 }
 
-/* Straighten + border + lift on hover */
-.case-study-image:hover {
-  transform: rotate(0deg) scale(1) !important;
+.case-study:hover .case-study-image {
+  transform: rotate(0deg) scale(1);
   box-shadow: 0 16px 56px rgba(0, 0, 0, 0.18);
   outline: 2.5px solid var(--dark);
   outline-offset: 4px;
