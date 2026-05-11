@@ -9,30 +9,6 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// CASE STUDY Cursor View
-const cursor = document.querySelector(".cursor-label");
-const cards = document.querySelectorAll(".case-study");
-
-cards.forEach(card => {
-  card.addEventListener("mouseenter", () => {
-    cursor.style.opacity = 1;
-  });
-
-  card.addEventListener("mouseleave", () => {
-    cursor.style.opacity = 0;
-  });
-
-  card.addEventListener("mousemove", (e) => {
-    const offsetX = 20; // distance from cursor (right)
-    const offsetY = 10; // slight vertical lift
-
-    cursor.style.left = (e.clientX + offsetX) + "px";
-    cursor.style.top = (e.clientY + offsetY) + "px";
-  });
-});
-
-
-
 /* ============================================================
    sorta.js — scripts for sorta.html
 ============================================================ */
