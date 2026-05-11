@@ -235,23 +235,6 @@ transform: translateX(-50%) translateY(2px);
 .case-study:nth-child(even) .case-study-text { order: 2; }
 .case-study:nth-child(even) .case-study-image { order: 1; }
 
-.case-study-tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-}
-
-.tag {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--mid);
-    border: 1.5px solid #ccc9c3;
-    border-radius: 999px;
-    padding: 3px 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
 
 .case-study-year {
     font-size: 0.85rem;
