@@ -13,10 +13,17 @@ window.addEventListener("scroll", () => {
 const cursor = document.querySelector(".cursor-label");
 const cards = document.querySelectorAll(".case-study");
 
-cards.forEach(card => {
+const colors = [
+  "green", // rust
+  "orange", // teal
+  "blue"  // purple
+];
+
+cards.forEach((card, index) => {
   card.addEventListener("mouseenter", () => {
     cursor.textContent = "Open Project";
     cursor.style.opacity = 1;
+    cursor.style.background = colors[index];
   });
 
   card.addEventListener("mouseleave", () => {
@@ -24,15 +31,10 @@ cards.forEach(card => {
   });
 
   card.addEventListener("mousemove", (e) => {
-    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-  });
-});
-
-card.addEventListener("mousemove", (e) => {
-  requestAnimationFrame(() => {
     cursor.style.transform = `translate(${e.clientX + 12}px, ${e.clientY + 12}px)`;
   });
 });
+
 
 /* ============================================================
    sorta.js — scripts for sorta.html

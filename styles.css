@@ -228,6 +228,7 @@ transform: translateX(-50%) translateY(2px);
     grid-template-columns: 1fr 1fr;
     gap: 48px;
     align-items: center;
+    cursor: default;
 }
 
 /* Alternate layout every other card */
@@ -353,7 +354,6 @@ footer .foot-right a:hover { color: var(--dark); }
 
 
 /* ── WONKY IMAGE HOVER ── */
-/* default tilted state stays the same */
 .case-study-image {
   transform: translateZ(0);
   transition: transform 0.18s ease-out;
@@ -361,22 +361,35 @@ footer .foot-right a:hover { color: var(--dark); }
 }
 
 .case-study:nth-child(1) .case-study-image {
-  transform: rotate(-1deg) scale(0.97);
+  transform: rotate(-1.3deg) scale(0.97);
 }
 
 .case-study:nth-child(2) .case-study-image {
-  transform: rotate(1deg) scale(0.97);
+  transform: rotate(1.3deg) scale(0.97);
 }
 
 .case-study:nth-child(3) .case-study-image {
-  transform: rotate(-1deg) scale(0.97);
+  transform: rotate(-1.3deg) scale(0.97);
 }
 
 .case-study:hover .case-study-image {
   transform: rotate(0deg) scale(1);
   box-shadow: 0 16px 56px rgba(0, 0, 0, 0.18);
-  outline: 2.5px solid var(--dark);
+  outline: 4px solid var(--dark);
   outline-offset: 4px;
+}
+
+/* different colours per case study */
+.case-study:nth-child(1):hover .case-study-image {
+  outline-color: green; /* rust */
+}
+
+.case-study:nth-child(2):hover .case-study-image {
+  outline-color: orange; /* teal */
+}
+
+.case-study:nth-child(3):hover .case-study-image {
+  outline-color: blue; /* purple */
 }
 
 /* CURSOR - "Open Project" */
@@ -395,6 +408,26 @@ footer .foot-right a:hover { color: var(--dark); }
   transition: opacity 0.15s ease;
   z-index: 9999;
   white-space: nowrap;
+}
+
+/* default cursor COLOUR */
+.cursor-label {
+  background: black;
+}
+
+/* CASE STUDY 1 */
+.case-study:nth-child(1):hover ~ .cursor-label {
+  background: green;
+}
+
+/* CASE STUDY 2 */
+.case-study:nth-child(2):hover ~ .cursor-label {
+  background: orange;
+}
+
+/* CASE STUDY 3 */
+.case-study:nth-child(3):hover ~ .cursor-label {
+  background: blue;
 }
 
 /* CASE STUDY LINK */
