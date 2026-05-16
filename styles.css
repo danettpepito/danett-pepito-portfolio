@@ -98,6 +98,7 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
 
     padding: 120px 10vw 200px;
     align-items: flex-start;
@@ -1327,66 +1328,6 @@ footer .foot-right a:hover { color: var(--dark); }
   }
 
 
-  .hero-ctas {
-    margin-top: 48px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  
-  .hero-cta-prompt {
-    font-size: 0.8rem;
-    color: var(--mid);
-    opacity: 0.6;
-    font-family: monospace;
-    letter-spacing: 0.02em;
-  }
-  
-  .hero-cta-buttons {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border-radius: 3px;
-    background: var(--dark);
-    color: white;
-    transition: background 0.2s, transform 0.2s, gap 0.2s;
-  }
-  
-  .hero-cta:hover {
-    background: var(--rust);
-    transform: translateY(-2px);
-    gap: 14px;
-  }
-  
-  .hero-cta--ghost {
-    background: transparent;
-    color: var(--dark);
-    border: 1.5px solid var(--dark);
-  }
-  
-  .hero-cta--ghost:hover {
-    background: var(--dark);
-    color: white;
-  }
-  
-  .cta-arrow {
-    transition: transform 0.2s ease;
-  }
-  
-  .hero-cta:hover .cta-arrow {
-    transform: translateX(3px);
-  }
-
-
   .name-swap {
     position: relative;
     display: inline-block;
@@ -1443,4 +1384,62 @@ footer .foot-right a:hover { color: var(--dark); }
     opacity: 0;
   }
 
+  .scroll-indicator {
+    position: absolute !important;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+    z-index: 2;
+  }
   
+  .scroll-indicator:hover {
+    opacity: 1;
+  }
+
+  .scroll-arrow {
+    width: 32px;
+    height: 32px;
+    display: block;
+    animation: bounce 1.6s ease-in-out infinite;
+  }
+
+  /* ── MARQUEE STRIP ── */
+.marquee-strip {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1.5px solid #dbd8d2;
+  border-bottom: 1.5px solid #dbd8d2;
+  padding: 14px 0;
+  background: var(--bg);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-track span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--mid);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.marquee-dot {
+  color: var(--rust) !important;
+}
+
+.marquee-strip:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

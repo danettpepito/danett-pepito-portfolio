@@ -244,7 +244,7 @@ function runDecode() {
   if (!decodeEl) { runDigitalSpaces(); return; }
   const finalWord = "decode";
   const chars = "abdefklmnopqrstuvwxchijyz";
-  const totalFrames = 52;
+  const totalFrames = 50;
   let frame = 0;
   const interval = setInterval(() => {
     frame++;
@@ -259,18 +259,18 @@ function runDecode() {
     if (frame >= totalFrames) {
       clearInterval(interval);
       decodeEl.textContent = finalWord;
-      setTimeout(runDigitalSpaces, 800);
+      setTimeout(runDigitalSpaces, 1000);
     }
-  }, 1000 / 100);
+  }, 1000 / 36);
 }
 
 function runDigitalSpaces() {
   if (!digitalEl) return;
   gsap.fromTo(digitalEl,
-    { backgroundPosition: "200% 50%" },
+    { backgroundPosition: "0% 50%" },
     {
       backgroundPosition: "-150% 50%",
-      duration: 6,
+      duration: 8,
       ease: "power1.inOut",
     }
   );
@@ -278,4 +278,6 @@ function runDigitalSpaces() {
 
 // kick off after short delay
 setTimeout(runDecode, 600);
+
+
 
