@@ -105,7 +105,7 @@ nav {
 
 /* Hero headline */
 .hero-headline {
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 800;
     line-height: 1.1;
 }
@@ -267,33 +267,6 @@ transform: translateX(-50%) translateY(2px);
     box-shadow: 0 8px 40px rgba(0,0,0,0.08);
 }
 
-/* Placeholder card content */
-.card-placeholder {
-    text-align: center;
-    padding: 40px;
-}
-
-.card-placeholder .card-logo {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.card-placeholder .card-sub {
-    font-size: 0.8rem;
-    color: var(--mid);
-    margin-top: 6px;
-}
-
-/* Card colour accents */
-.card-dark { background: #2a2a2a; }
-.card-purple { background: #6B3FA0; }
-.card-teal { background: #1a8a7a; }
-
 /* ── Footer ── */
 footer {
     padding: 60px 80px;
@@ -359,7 +332,7 @@ footer .foot-right a:hover { color: var(--dark); }
 }
 
 .case-study:nth-child(3):hover .case-study-image {
-  outline-color: #FF69B4;; /* purple */
+  outline-color: #FF69B4; /* purple */
 }
 
 /* CURSOR - "Open Project" */
@@ -1304,12 +1277,40 @@ footer .foot-right a:hover { color: var(--dark); }
 
   #digital-spaces {
     display: inline;
+    background: linear-gradient(
+      40deg,
+      #222220 0%,
+      #222220 35%,
+      #f97316 45%,
+      #facc15 52%,
+      #4ade80 58%,
+      #60a5fa 64%,
+      #c084fc 70%,
+      #f472b6 76%,
+      #222220 86%,
+      #222220 100%
+    );
+    background-size: 400% auto;
+    background-position: 150% 50%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  @keyframes sweep {
+    0%   { background-position: 150% 100%; }
+    100% { background-position: -50% 50%; }
+  }
+  
+  @keyframes rainbow-shift {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
   }
   
   .ds-letter {
     display: inline-block; /* needed for transform to work */
     color: var(--dark);
-    transition: color 0.1s;
+    transition: color 0.01s;
   }
   
 
@@ -1324,3 +1325,122 @@ footer .foot-right a:hover { color: var(--dark); }
     0%, 100% { opacity: 1; }
     50%       { opacity: 0; }
   }
+
+
+  .hero-ctas {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .hero-cta-prompt {
+    font-size: 0.8rem;
+    color: var(--mid);
+    opacity: 0.6;
+    font-family: monospace;
+    letter-spacing: 0.02em;
+  }
+  
+  .hero-cta-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 3px;
+    background: var(--dark);
+    color: white;
+    transition: background 0.2s, transform 0.2s, gap 0.2s;
+  }
+  
+  .hero-cta:hover {
+    background: var(--rust);
+    transform: translateY(-2px);
+    gap: 14px;
+  }
+  
+  .hero-cta--ghost {
+    background: transparent;
+    color: var(--dark);
+    border: 1.5px solid var(--dark);
+  }
+  
+  .hero-cta--ghost:hover {
+    background: var(--dark);
+    color: white;
+  }
+  
+  .cta-arrow {
+    transition: transform 0.2s ease;
+  }
+  
+  .hero-cta:hover .cta-arrow {
+    transform: translateX(3px);
+  }
+
+
+  .name-swap {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+  }
+  
+  .name-real {
+    display: inline-block;
+    transition: opacity 0.2s ease;
+    text-decoration: none;
+    position: relative;
+  }
+  
+  /* the strikethrough line */
+  .name-real::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0%;
+    height: 1.5px;
+    background: #999;
+    transition: width 0.25s ease;
+  }
+  
+  .name-alt {
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.25s ease 0.1s, transform 0.25s ease 0.1s;
+    pointer-events: none;
+  }
+  
+  /* on hover */
+  .name-swap:hover .name-real::after {
+    width: 100%;
+  }
+  
+  .name-swap:hover .name-alt {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .comment-close {
+    transition: opacity 0.2s ease;
+  }
+  
+  .name-swap:hover ~ .comment-close {
+    opacity: 0;
+  }
+
+  
