@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Danett | UX Portfolio</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
   <script src="script.js" defer></script>
 </head>
 
@@ -20,14 +21,15 @@
 
   <!-- ── Hero ── -->
   <section class="hero">
+    <canvas id="heroCanvas"></canvas>
 
     <!-- main headline -->
     <h1 class="hero-headline">
         <span class="hero-comment">
-          &lt;!-- Hey, I'm Danett --&gt;
+          &lt;!-- Hey, I'm Danett (this site is a draft) --&gt;
         </span>
         <br>
-        I’m curious about how people think; I decode human behvaviours and needs to shape strategic and meaningful experiences in digital spaces.
+        I’m curious about how people think; I <span id="decode-word">decode</span> human behvaviours and needs to shape strategic and meaningful experiences in digital spaces.
       </h1>
 
       <a href="#work" class="scroll-indicator">
@@ -48,7 +50,7 @@
       <a href="sorta2.html" class="case-study">
         <div class="case-study-text">
           <p class="case-study-year">Sorta | 2025</p>
-          <h2 class="case-study-title">I designed a bin and companion app to help reduce food waste confusion</h2>
+          <h2 class="case-study-title">I designed a <strong>bin and companion app</strong> to help reduce food waste confusion</h2>
           <p class="case-study-desc">Through service and product design.</p>
         </div>
     
@@ -62,7 +64,7 @@
       <article class="case-study">
         <div class="case-study-text">
           <p class="case-study-year">Jumble | 2025</p>
-          <h2 class="case-study-title">I also created a platform to show the messy side of the creative process</h2>
+          <h2 class="case-study-title">I also created a web based media platform to show the messy side of the creative process</h2>
           <p class="case-study-desc">in #progress</p>
         </div>
         <div class="case-study-image jumble-image">
