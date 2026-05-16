@@ -316,6 +316,10 @@ footer .foot-right a:hover { color: var(--dark); }
   transform: rotate(-1.3deg) scale(0.97);
 }
 
+.case-study:nth-child(4) .case-study-image {
+  transform: rotate(1.3deg) scale(0.97);
+}
+
 .case-study:hover .case-study-image {
   transform: rotate(0deg) scale(1);
   box-shadow: 0 16px 56px rgba(0, 0, 0, 0.18);
@@ -334,6 +338,10 @@ footer .foot-right a:hover { color: var(--dark); }
 
 .case-study:nth-child(3):hover .case-study-image {
   outline-color: #FF69B4; /* purple */
+}
+
+.case-study:nth-child(4):hover .case-study-image {
+  outline-color: blue; /* purple */
 }
 
 /* CURSOR - "Open Project" */
