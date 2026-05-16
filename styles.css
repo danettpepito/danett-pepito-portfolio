@@ -219,11 +219,24 @@ transform: translateX(-50%) translateY(2px);
 
 /* ── Case study card ── */
 .case-study {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-    cursor: default;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  cursor: default;
+}
+
+/* link becomes the clickable wrapper but DOES NOT break grid */
+.case-study-link-wrap {
+  display: contents; 
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
+}
+
+/* optional hover effect on whole section */
+.case-study:hover .case-study-image {
+  transform: rotate(0deg) scale(1) !important;
 }
 
 /* Alternate layout every other card */
@@ -367,7 +380,7 @@ footer .foot-right a:hover { color: var(--dark); }
 }
 
 .case-study:nth-child(3):hover .case-study-image {
-  outline-color: blue; /* purple */
+  outline-color: #FF69B4;; /* purple */
 }
 
 /* CURSOR - "Open Project" */
@@ -391,21 +404,6 @@ footer .foot-right a:hover { color: var(--dark); }
 /* default cursor COLOUR */
 .cursor-label {
   background: black;
-}
-
-/* CASE STUDY 1 */
-.case-study:nth-child(1):hover ~ .cursor-label {
-  background: green;
-}
-
-/* CASE STUDY 2 */
-.case-study:nth-child(2):hover ~ .cursor-label {
-  background: orange;
-}
-
-/* CASE STUDY 3 */
-.case-study:nth-child(3):hover ~ .cursor-label {
-  background: blue;
 }
 
 /* CASE STUDY LINK */
@@ -442,6 +440,10 @@ footer .foot-right a:hover { color: var(--dark); }
 
 .jumble-image {
     background: url("assets/jumble/Screenshot\ 2026-05-10\ at\ 13.41.20.png") center/cover no-repeat;
+}
+
+.outbox-image {
+  background: url("assets/jumble/Screenshot\ 2026-05-10\ at\ 13.41.20.png") center/cover no-repeat;
 }
 
 
@@ -1283,4 +1285,40 @@ footer .foot-right a:hover { color: var(--dark); }
   /* visible state */
   nav.show {
     transform: translateY(0);
+  }
+
+
+/* ----IMAGE HOVER EFFECT
+ -----------------------*/
+  .hover-image {
+    position: relative;
+    cursor: pointer;
+    border-bottom: 2px dotted var(--mid);
+  }
+  
+  /* hidden image */
+  .hover-image img {
+    position: absolute;
+    left: 50%;
+    bottom: 120%;
+    transform: translateX(-50%) scale(0.95);
+  
+    width: 420px;   /* 👈 big image */
+    max-width: 60vw;
+  
+  
+    opacity: 0;
+    pointer-events: none;
+  
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+  }
+  
+  /* show on hover */
+  .hover-image:hover img {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
   }

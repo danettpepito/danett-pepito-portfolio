@@ -14,9 +14,9 @@ const cursor = document.querySelector(".cursor-label");
 const cards = document.querySelectorAll(".case-study");
 
 const colors = [
-  "green", // rust
-  "orange", // teal
-  "blue"  // purple
+  "green", // green
+  "orange", // orange
+  "#FF69B4"  // pink
 ];
 
 cards.forEach((card, index) => {
