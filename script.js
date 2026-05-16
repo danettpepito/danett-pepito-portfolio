@@ -9,6 +9,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
+
 // CURSOR - "Open Project"
 const cursor = document.querySelector(".cursor-label");
 const cards = document.querySelectorAll(".case-study");
@@ -45,14 +46,38 @@ if (canvas) {
   const DOT_COUNT = 80;
   const CONNECT_DIST = 140;
   const MOUSE_DIST = 160;
+  const PADDING = 24; // clearance around text
 
   const COLOURS = [
-    "200,180",   // rust
-    "100, 160, 100", // green
-    "100, 130, 200", // blue
-    "200, 160, 80",  // amber
-    "180, 100, 180", // purple
+    "156, 59, 26",
+    "100, 160, 100",
+    "100, 130, 200",
+    "200, 160, 80",
+    "180, 100, 180",
   ];
+
+  // get bounding boxes of all text elements inside hero
+  function getTextRects() {
+    const hero = canvas.closest(".hero");
+    if (!hero) return [];
+    const els = hero.querySelectorAll("h1, span, a, p");
+    const canvasRect = canvas.getBoundingClientRect();
+    const rects = [];
+    els.forEach(el => {
+      const r = el.getBoundingClientRect();
+      rects.push({
+        left:   r.left   - canvasRect.left - PADDING,
+        right:  r.right  - canvasRect.left + PADDING,
+        top:    r.top    - canvasRect.top  - PADDING,
+        bottom: r.bottom - canvasRect.top  + PADDING,
+      });
+    });
+    return rects;
+  }
+
+  function insideAnyRect(x, y, rects) {
+    return rects.some(r => x > r.left && x < r.right && y > r.top && y < r.bottom);
+  }
 
   function resize() {
     canvas.width  = canvas.offsetWidth;
@@ -60,41 +85,54 @@ if (canvas) {
   }
 
   function spawnDots() {
+    const rects = getTextRects();
     dots = [];
-    for (let i = 0; i < DOT_COUNT; i++) {
-      dots.push({
-        x:  Math.random() * canvas.width,
-        y:  Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r:  Math.random() * 4 + 2.5,
-        color: COLOURS[Math.floor(Math.random() * COLOURS.length)],
-      });
+    let attempts = 0;
+    while (dots.length < DOT_COUNT && attempts < DOT_COUNT * 20) {
+      attempts++;
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      if (!insideAnyRect(x, y, rects)) {
+        dots.push({
+          x, y,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r:  Math.random() * 4 + 2.5,
+          color: COLOURS[Math.floor(Math.random() * COLOURS.length)],
+        });
+      }
     }
   }
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const rects = getTextRects();
 
     dots.forEach(d => {
       d.x += d.vx;
       d.y += d.vy;
+
+      // bounce off canvas edges
       if (d.x < 0 || d.x > canvas.width)  d.vx *= -1;
       if (d.y < 0 || d.y > canvas.height) d.vy *= -1;
+
+      // if dot drifts into text area, reverse and nudge out
+      if (insideAnyRect(d.x, d.y, rects)) {
+        d.vx *= -1;
+        d.vy *= -1;
+        d.x += d.vx * 4;
+        d.y += d.vy * 4;
+      }
     });
 
     dots.forEach((d, i) => {
       const nearMouse = mouse.x !== null &&
         Math.hypot(d.x - mouse.x, d.y - mouse.y) < MOUSE_DIST;
 
-      // lines only when mouse is nearby
       if (mouse.x !== null) {
-
-        // dot-to-dot lines only if both are near mouse
         for (let j = i + 1; j < dots.length; j++) {
           const d2 = dots[j];
           const nearMouse2 = Math.hypot(d2.x - mouse.x, d2.y - mouse.y) < MOUSE_DIST;
-
           if (nearMouse && nearMouse2) {
             const dist = Math.hypot(d.x - d2.x, d.y - d2.y);
             if (dist < CONNECT_DIST) {
@@ -109,7 +147,6 @@ if (canvas) {
           }
         }
 
-        // dot-to-mouse line
         if (nearMouse) {
           const distToMouse = Math.hypot(d.x - mouse.x, d.y - mouse.y);
           const alpha = (1 - distToMouse / MOUSE_DIST) * 0.5;
@@ -122,7 +159,6 @@ if (canvas) {
         }
       }
 
-      // dots — colourful near mouse, grey otherwise
       ctx.beginPath();
       ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
       ctx.fillStyle = nearMouse
@@ -153,49 +189,6 @@ if (canvas) {
   resize();
   spawnDots();
   draw();
-}
-
-// ── DECODE SCRAMBLE ──
-const decodeEl = document.getElementById("decode-word");
-
-if (decodeEl) {
-  const finalWord = "decode";
-  const chars = "abcdefghijklmnopqrstuvwxyz";
-  const duration = 1.8;
-  const fps = 30;
-  const totalFrames = Math.round(duration * fps);
-
-  let frame = 0;
-  let interval;
-
-  function scramble() {
-    frame++;
-    const progress = frame / totalFrames;
-
-    // reveal letters left to right as progress increases
-    const revealed = Math.floor(progress * finalWord.length);
-
-    let display = "";
-    for (let i = 0; i < finalWord.length; i++) {
-      if (i < revealed) {
-        display += finalWord[i];
-      } else {
-        display += chars[Math.floor(Math.random() * chars.length)];
-      }
-    }
-
-    decodeEl.textContent = display;
-
-    if (frame >= totalFrames) {
-      clearInterval(interval);
-      decodeEl.textContent = finalWord;
-    }
-  }
-
-  // small delay so it fires after page paints
-  setTimeout(() => {
-    interval = setInterval(scramble, 1000 / fps);
-  }, 400);
 }
 
 /* ============================================================
@@ -273,3 +266,79 @@ window.addEventListener("scroll", () => {
     floatingNav.classList.remove("show");
   }
 });
+
+
+// ── HERO SEQUENCE ──
+const typedEl   = document.getElementById("typed-text");
+const cursorEl  = document.querySelector(".typed-cursor");
+const heroUsp   = document.getElementById("hero-usp");
+const decodeEl  = document.getElementById("decode-word");
+const digitalEl = document.getElementById("digital-spaces");
+
+if (typedEl) {
+  const phrase = "Hey, I'm Danett";
+  let i = 0;
+
+  function typeIn() {
+    if (i < phrase.length) {
+      typedEl.textContent += phrase[i];
+      i++;
+      setTimeout(typeIn, 55 + Math.random() * 40);
+    } else {
+      setTimeout(() => {
+        cursorEl.style.display = "none";
+        runDecode();
+      }, 500);
+    }
+  }
+
+  function runDecode() {
+    if (!decodeEl) { runDigitalSpaces(); return; }
+    const finalWord = "decode";
+    const chars = "abcdefghijklmnopqrstuvwxyz";
+    const totalFrames = 54;
+    let frame = 0;
+    const interval = setInterval(() => {
+      frame++;
+      const revealed = Math.floor((frame / totalFrames) * finalWord.length);
+      let display = "";
+      for (let c = 0; c < finalWord.length; c++) {
+        display += c < revealed
+          ? finalWord[c]
+          : chars[Math.floor(Math.random() * chars.length)];
+      }
+      decodeEl.textContent = display;
+      if (frame >= totalFrames) {
+        clearInterval(interval);
+        decodeEl.textContent = finalWord;
+        setTimeout(runDigitalSpaces, 200);
+      }
+    }, 1000 / 30);
+  }
+
+  function runDigitalSpaces() {
+    if (!digitalEl) return;
+    const letters = digitalEl.querySelectorAll(".ds-letter");
+    const colours = ["#9c3b1a","#4ade80","#60a5fa","#f97316","#c084fc","#facc15","#f472b6"];
+    gsap.timeline()
+      .to(letters, {
+        color: (i) => colours[i % colours.length],
+        scale: () => 1 + Math.random() * 0.6,
+        rotation: () => (Math.random() - 0.5) * 25,
+        y: () => (Math.random() - 0.5) * 14,
+        duration: 0.5, stagger: 0.06, ease: "back.out(2)",
+      })
+      .to(letters, {
+        scale: () => 1 + Math.random() * 0.3,
+        rotation: () => (Math.random() - 0.5) * 12,
+        color: (i) => colours[(i + 3) % colours.length],
+        duration: 0.2, stagger: 0.02, ease: "sine.inOut",
+      })
+      .to(letters, {
+        color: "#222220", scale: 1, rotation: 0, y: 0,
+        duration: 0.3, stagger: 0.01, ease: "power3.out",
+      });
+  }
+
+  setTimeout(typeIn, 300);
+}

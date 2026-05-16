@@ -29,27 +29,6 @@ body {
 cursor: auto;
 }
 
-.scroll-indicator {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    opacity: 0.8;
-}
-
-.scroll-arrow {
-    width: 100%;
-    height: 30px;
-    display: block;
-
-    animation: bounce 1.2s infinite ease-in-out;
-}
-
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
@@ -443,7 +422,7 @@ footer .foot-right a:hover { color: var(--dark); }
 }
 
 .outbox-image {
-  background: url("assets/jumble/Screenshot\ 2026-05-10\ at\ 13.41.20.png") center/cover no-repeat;
+  background: url("assets/outbox/giphy\ \(1\).gif") center/cover no-repeat;
 }
 
 
@@ -1303,7 +1282,7 @@ footer .foot-right a:hover { color: var(--dark); }
     bottom: 120%;
     transform: translateX(-50%) scale(0.95);
   
-    width: 420px;   /* 👈 big image */
+    width: 600px;   /* 👈 big image */
     max-width: 60vw;
   
   
@@ -1321,4 +1300,27 @@ footer .foot-right a:hover { color: var(--dark); }
   .hover-image:hover img {
     opacity: 1;
     transform: translateX(-50%) scale(1);
+  }
+
+  #digital-spaces {
+    display: inline;
+  }
+  
+  .ds-letter {
+    display: inline-block; /* needed for transform to work */
+    color: var(--dark);
+    transition: color 0.1s;
+  }
+  
+
+  .typed-cursor {
+    display: inline-block;
+    animation: blink 0.7s step-end infinite;
+    font-weight: 400;
+    color: #999;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
   }
