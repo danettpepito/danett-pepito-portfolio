@@ -365,7 +365,7 @@ footer .foot-right a:hover { color: var(--dark); }
 
 /* CASE STUDY IMAGES */
 .sorta-image {
-    background: url("assets/sorta/Screenshot\ 2026-05-11\ at\ 21.09.48\ 1.png") center/cover no-repeat;
+    background: url("assets/sorta/cover.png") center/cover no-repeat;
   }
 
 .jumble-image {
@@ -1539,3 +1539,38 @@ footer .foot-right a:hover { color: var(--dark); }
   color: var(--rust);
 }
 
+/* OUTCOME */
+.cs-outcome-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+
+  align-items: center; /* vertical alignment */
+  margin-top: 24px;
+}
+
+/* LEFT TEXT */
+.cs-outcome-text h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: green;
+}
+
+.cs-outcome-text p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #5e5e5a;
+  max-width: 480px;
+}
+
+/* RIGHT IMAGE */
+.cs-outcome-image img {
+  height: 400px;
+  width: 100%;
+
+  object-fit: cover;
+  display: block;
+
+  transform: scale(1.8); 
+}

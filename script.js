@@ -48,12 +48,28 @@ if (canvas) {
   const PADDING = 24;
 
   const COLOURS = [
-    "255, 105, 170",  // richer pink
-    "255, 200, 90",   // warmer yellow
-    "90, 170, 255",   // stronger sky blue
-    "90, 210, 140",   // richer mint green
-    "170, 110, 255",  // stronger lavender
+    "255, 80, 140",   // hot pink
+    "255, 180, 60",   // warm amber
+    "80, 160, 255",   // electric blue
+    "80, 230, 160",   // mint green
+    "170, 110, 255",  // violet
   ];
+
+  const WORDS = [
+    "human-centred", "curiosity", "insight-driven", "empathetic",
+    "strategic thinking"
+  ];
+
+  // word labels that float at intersection points
+  const wordLabels = WORDS.map((word, i) => ({
+    word,
+    opacity: 0,
+    targetOpacity: 0,
+    x: 0,
+    y: 0,
+    lastSeen: 0,
+    color: COLOURS[i % COLOURS.length],
+  }));
 
   function getTextRects() {
     const hero = canvas.closest(".hero");
@@ -97,14 +113,20 @@ if (canvas) {
           vy: (Math.random() - 0.5) * 0.4,
           r:  Math.random() * 4 + 2.5,
           color: COLOURS[Math.floor(Math.random() * COLOURS.length)],
+          wordIndex: Math.random() < 0.15
+            ? Math.floor(Math.random() * wordLabels.length)
+            : null, // only ~15% of dots carry a word
         });
       }
     }
   }
 
+  let frameCount = 0;
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const rects = getTextRects();
+    frameCount++;
 
     dots.forEach(d => {
       d.x += d.vx;
@@ -119,6 +141,9 @@ if (canvas) {
       }
     });
 
+    // reset word target opacities
+    wordLabels.forEach(w => { w.targetOpacity = 0; });
+
     dots.forEach((d, i) => {
       const nearMouse = mouse.x !== null &&
         Math.hypot(d.x - mouse.x, d.y - mouse.y) < MOUSE_DIST;
@@ -127,16 +152,27 @@ if (canvas) {
         for (let j = i + 1; j < dots.length; j++) {
           const d2 = dots[j];
           const nearMouse2 = Math.hypot(d2.x - mouse.x, d2.y - mouse.y) < MOUSE_DIST;
+
           if (nearMouse && nearMouse2) {
             const dist = Math.hypot(d.x - d2.x, d.y - d2.y);
             if (dist < CONNECT_DIST) {
-              const alpha = (1 - dist / CONNECT_DIST) * 0.35;
+              const alpha = (1 - dist / CONNECT_DIST) * 0.45;
               ctx.beginPath();
               ctx.strokeStyle = `rgba(${d.color}, ${alpha})`;
               ctx.lineWidth = 1;
               ctx.moveTo(d.x, d.y);
               ctx.lineTo(d2.x, d2.y);
               ctx.stroke();
+
+              // if either dot carries a word, show it at the midpoint
+              const wordDot = d.wordIndex !== null ? d : (d2.wordIndex !== null ? d2 : null);
+              if (wordDot) {
+                const label = wordLabels[wordDot.wordIndex];
+                label.x = (d.x + d2.x) / 2;
+                label.y = (d.y + d2.y) / 2 - 12;
+                label.targetOpacity = Math.min(alpha * 4, 1);
+                label.color = wordDot.color;
+              }
             }
           }
         }
@@ -159,6 +195,22 @@ if (canvas) {
         ? `rgba(${d.color}, 0.75)`
         : `rgba(136, 136, 132, 0.05)`;
       ctx.fill();
+    });
+
+    // draw word labels — smoothly fade toward target
+    wordLabels.forEach(label => {
+      label.opacity += (label.targetOpacity - label.opacity) * 0.08;
+
+      if (label.opacity > 0.01) {
+        ctx.save();
+        ctx.globalAlpha = Math.min(label.opacity, 0.85);
+        ctx.font = "600 11px 'LineSeed', sans-serif";
+        ctx.fillStyle = `rgb(${label.color})`;
+        ctx.letterSpacing = "0.08em";
+        ctx.textAlign = "center";
+        ctx.fillText(label.word.toUpperCase(), label.x, label.y);
+        ctx.restore();
+      }
     });
 
     requestAnimationFrame(draw);
@@ -245,7 +297,7 @@ const cursorEl  = document.querySelector(".typed-cursor");
 
 function typeIn() {
   if (!typedEl) { runDecode(); return; }
-  const phrase = "Hey, I'm Danett";
+  const phrase = "Heya, I'm Danett";
   let i = 0;
 
   function tick() {
@@ -287,7 +339,7 @@ function runDecode() {
     if (frame >= totalFrames) {
       clearInterval(interval);
       decodeEl.textContent = finalWord;
-      setTimeout(runPopWords, 300);
+      setTimeout(runPopWords, 500);
     }
   }, 1000 / 36);
 }
@@ -300,7 +352,7 @@ function runPopWords() {
       if (i === popWords.length - 1) {
         setTimeout(runDigitalSpaces, 400);
       }
-    }, i * 100);
+    }, i * 150);
   });
 }
 
