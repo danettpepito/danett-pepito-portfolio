@@ -148,28 +148,6 @@ nav {
     margin-bottom: 48px;
 }
   
-/* Hero arrow */
-.scroll-indicator {
-    position: absolute;
-    bottom: 0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-  
-    font-size: 2rem;
-    line-height: 1;
-  
-    color: #888;
-    text-decoration: none;
-  
-    animation: float 2s ease-in-out infinite;
-    transition: opacity 0.2s ease;
-  }
-
-.scroll-indicator:hover {
-opacity: 0.6;
-transform: translateX(-50%) translateY(2px);
-}
-
 /* ── HERO CANVAS DOTS ── */
 #heroCanvas {
   position: absolute;
@@ -186,16 +164,7 @@ transform: translateX(-50%) translateY(2px);
   z-index: 1;
 }
 
-/* ── Work section ── */
-.work {
-    padding: 80px 80px 120px;
-}
 
-.work-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
-}
 
 /* ── Case study card ── */
 .case-study {
@@ -1286,40 +1255,7 @@ footer .foot-right a:hover { color: var(--dark); }
 
   #digital-spaces {
     display: inline;
-    background: linear-gradient(
-      40deg,
-      #222220 0%,
-      #222220 35%,
-      #f97316 45%,
-      #facc15 52%,
-      #4ade80 58%,
-      #60a5fa 64%,
-      #c084fc 70%,
-      #f472b6 76%,
-      #222220 86%,
-      #222220 100%
-    );
-    background-size: 400% auto;
-    background-position: 150% 50%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  @keyframes sweep {
-    0%   { background-position: 150% 100%; }
-    100% { background-position: -50% 50%; }
-  }
-  
-  @keyframes rainbow-shift {
-    0%   { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-  }
-  
-  .ds-letter {
-    display: inline-block; /* needed for transform to work */
-    color: var(--dark);
-    transition: color 0.01s;
+    opacity: 0;
   }
   
 
@@ -1413,7 +1349,7 @@ footer .foot-right a:hover { color: var(--dark); }
     animation: bounce 1.6s ease-in-out infinite;
   }
 
-  /* ── MARQUEE STRIP ── */
+  /* ── IMAGE MARQUEE STRIP ── */
 .marquee-strip {
   width: 100%;
   overflow: hidden;
@@ -1451,3 +1387,155 @@ footer .foot-right a:hover { color: var(--dark); }
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
+
+.cs-marquee {
+  width: 100%;
+  overflow: hidden;
+  padding: 3rem 0;
+  position: relative;
+}
+
+.cs-marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: marqueeScroll 80s linear infinite;
+}
+
+.cs-marquee-track img {
+  width: auto;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 3px;
+  flex-shrink: 0;
+
+  transition: transform 0.4s ease,
+              opacity 0.4s ease;
+}
+
+.cs-marquee-track img:hover {
+  transform: translateY(-6px);
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.cs-marquee::before,
+.cs-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cs-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, #f7f4ef, transparent);
+}
+
+.cs-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, #f7f4ef, transparent);
+}
+
+.cs-marquee:hover .cs-marquee-track {
+  animation-play-state: paused;
+}
+
+
+/* ── POP WORDS ── */
+.pop-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.pop-word.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Work section ── */
+.work {
+  padding: 80px 80px 120px;
+}
+
+.work-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* ── HERE'S HOW ── */
+.heres-how {
+  padding: 80px 80px 0;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.heres-how.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heres-how-comment {
+  display: block;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--mid);
+  opacity: 0.5;
+  margin-bottom: 8px;
+}
+
+.heres-how-title {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -3px;
+  color: var(--dark);
+}
+
+
+/* ── WORK PROMPT ── */
+.work-prompt {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 32px;
+  padding-left: 2px;
+}
+
+.work-prompt-comment {
+  font-family: monospace;
+  font-size: 1rem;
+  color: var(--mid);
+  opacity: 0.6;
+}
+
+.work-prompt-code {
+  font-family: monospace;
+  font-size: 1rem;
+  color: var(--dark);
+}
+
+.code-keyword {
+  color: #60a5fa;
+}
+
+.code-fn {
+  color: var(--rust);
+}
+

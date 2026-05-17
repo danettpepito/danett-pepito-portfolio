@@ -239,10 +239,38 @@ if (floatingNav && stickyInfo) {
 // ── HERO SEQUENCE ──
 const decodeEl  = document.getElementById("decode-word");
 const digitalEl = document.getElementById("digital-spaces");
+const popWords  = document.querySelectorAll(".pop-word");
+const typedEl   = document.getElementById("typed-text");
+const cursorEl  = document.querySelector(".typed-cursor");
+
+function typeIn() {
+  if (!typedEl) { runDecode(); return; }
+  const phrase = "Hey, I'm Danett";
+  let i = 0;
+
+  function tick() {
+    if (i < phrase.length) {
+      typedEl.textContent += phrase[i];
+      i++;
+
+      // start decode halfway through typing
+      if (i === Math.floor(phrase.length / 8)) {
+        setTimeout(runDecode, 100);
+      }
+
+      setTimeout(tick, 80 + Math.random() * 40);
+    } else {
+      setTimeout(() => {
+        if (cursorEl) cursorEl.style.display = "none";
+      }, 1000);
+    }
+  }
+  tick();
+}
 
 function runDecode() {
-  if (!decodeEl) { runDigitalSpaces(); return; }
-  const finalWord = "decode";
+  if (!decodeEl) { runPopWords(); return; }
+  const finalWord = "user behaviours";
   const chars = "abdefklmnopqrstuvwxchijyz";
   const totalFrames = 50;
   let frame = 0;
@@ -259,22 +287,78 @@ function runDecode() {
     if (frame >= totalFrames) {
       clearInterval(interval);
       decodeEl.textContent = finalWord;
-      setTimeout(runDigitalSpaces, 1000);
+      setTimeout(runPopWords, 300);
     }
   }, 1000 / 36);
 }
 
+function runPopWords() {
+  if (!popWords.length) { runDigitalSpaces(); return; }
+  popWords.forEach((word, i) => {
+    setTimeout(() => {
+      word.classList.add("visible");
+      if (i === popWords.length - 1) {
+        setTimeout(runDigitalSpaces, 400);
+      }
+    }, i * 100);
+  });
+}
+
 function runDigitalSpaces() {
   if (!digitalEl) return;
-  gsap.fromTo(digitalEl,
-    { backgroundPosition: "0% 50%" },
-    {
-      backgroundPosition: "-150% 50%",
-      duration: 8,
-      ease: "power1.inOut",
+
+  // grab the text before we destroy it
+  const text = digitalEl.textContent;
+  const colours = [
+    "#f97316","#facc15","#4ade80","#60a5fa",
+    "#c084fc","#f472b6","#f97316","#facc15",
+    "#4ade80","#60a5fa","#c084fc","#f472b6"
+  ];
+
+  // set min dimensions before clearing to prevent layout shift
+  digitalEl.style.cssText = `
+    display: inline;
+    opacity: 1;
+    min-width: ${digitalEl.offsetWidth}px;
+  `;
+
+  digitalEl.innerHTML = "";
+
+  const spans = [];
+  [...text].forEach(char => {
+    const span = document.createElement("span");
+    span.textContent = char;
+    span.style.color = "rgba(34,34,32,0)";
+    span.style.transition = "color 0.25s ease";
+    // preserve spaces so they don't collapse
+    if (char === " ") span.style.whiteSpace = "pre";
+    digitalEl.appendChild(span);
+    spans.push(span);
+  });
+
+  let current = 0;
+  const delay = 55;
+
+  function revealNext() {
+    if (current >= spans.length) {
+      setTimeout(() => {
+        if (spans[spans.length - 1]) {
+          spans[spans.length - 1].style.color = "#222220";
+        }
+      }, delay);
+      return;
     }
-  );
+    spans[current].style.color = colours[current % colours.length];
+    if (current > 0) spans[current - 1].style.color = "#222220";
+    current++;
+    setTimeout(revealNext, delay);
+  }
+
+  setTimeout(revealNext, 200);
 }
+
+setTimeout(typeIn, 600);
+
 
 // kick off after short delay
 setTimeout(runDecode, 600);
