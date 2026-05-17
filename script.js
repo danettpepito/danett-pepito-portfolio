@@ -56,7 +56,7 @@ if (canvas) {
   ];
 
   const WORDS = [
-    "human-centred", "curiosity", "insight-driven", "empathetic",
+    "human-centred", "curious", "insight-driven", "empathetic",
     "strategic thinking"
   ];
 
