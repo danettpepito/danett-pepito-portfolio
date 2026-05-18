@@ -113,7 +113,7 @@ if (canvas) {
           vy: (Math.random() - 0.5) * 0.4,
           r:  Math.random() * 4 + 2.5,
           color: COLOURS[Math.floor(Math.random() * COLOURS.length)],
-          wordIndex: Math.random() < 0.50
+          wordIndex: Math.random() < 0.5
             ? Math.floor(Math.random() * wordLabels.length)
             : null, // only ~15% of dots carry a word
         });
@@ -407,6 +407,11 @@ function runDigitalSpaces() {
   }
 
   setTimeout(revealNext, 200);
+  // inside runDigitalSpaces(), after setTimeout(revealNext, 200):
+setTimeout(() => {
+  const cta = document.getElementById("heroScrollCta");
+  if (cta) cta.classList.add("visible");
+}, 200 + spans.length * 55 + 600); // waits for the letter-by-letter reveal to finish
 }
 
 setTimeout(typeIn, 600);
@@ -419,4 +424,3 @@ function togglePersona() {
   const dropdown = document.querySelector(".persona-dropdown");
   dropdown.classList.toggle("open");
 }
-
