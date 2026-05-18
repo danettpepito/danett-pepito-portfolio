@@ -297,7 +297,7 @@ const cursorEl  = document.querySelector(".typed-cursor");
 
 function typeIn() {
   if (!typedEl) { runDecode(); return; }
-  const phrase = "Heya, I'm Danett";
+  const phrase = "Hey, I'm Danett";
   let i = 0;
 
   function tick() {
