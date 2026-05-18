@@ -1600,3 +1600,11 @@ footer .foot-right a:hover { color: var(--dark); }
   display: block;
 
 }
+
+
+/*caption*/
+.caption {
+  text-align: center;
+  opacity: 0.4;
+  margin: 4px 20px 32px 20px;
+}
