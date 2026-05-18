@@ -313,6 +313,22 @@ footer .foot-right a:hover { color: var(--dark); }
   outline-color: blue; /* purple */
 }
 
+.case-green:hover strong {
+  color: green;
+}
+
+.case-orange:hover strong {
+  color: orange;
+}
+
+.case-pink:hover strong {
+  color: #FF69B4;
+}
+
+.case-study strong {
+  transition: color 0.2s ease;
+}
+
 /* CURSOR - "Open Project" */
 .cursor-label {
   position: fixed;
@@ -1573,4 +1589,14 @@ footer .foot-right a:hover { color: var(--dark); }
   display: block;
 
   transform: scale(1.8); 
+}
+
+/* RIGHT IMAGE */
+.cs-column-image img {
+  height: 100%px;
+  width: 100%;
+
+  object-fit: cover;
+  display: block;
+
 }
