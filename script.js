@@ -415,5 +415,8 @@ setTimeout(typeIn, 600);
 // kick off after short delay
 setTimeout(runDecode, 600);
 
-
+function togglePersona() {
+  const dropdown = document.querySelector(".persona-dropdown");
+  dropdown.classList.toggle("open");
+}
 
