@@ -63,8 +63,8 @@ if (canvas) {
   // word labels that float at intersection points
   const wordLabels = WORDS.map((word, i) => ({
     word,
-    opacity: 0,
-    targetOpacity: 0,
+    opacity: 1,
+    targetOpacity: 1,
     x: 0,
     y: 0,
     lastSeen: 0,
@@ -113,7 +113,7 @@ if (canvas) {
           vy: (Math.random() - 0.5) * 0.4,
           r:  Math.random() * 4 + 2.5,
           color: COLOURS[Math.floor(Math.random() * COLOURS.length)],
-          wordIndex: Math.random() < 0.15
+          wordIndex: Math.random() < 0.50
             ? Math.floor(Math.random() * wordLabels.length)
             : null, // only ~15% of dots carry a word
         });

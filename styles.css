@@ -1608,3 +1608,10 @@ footer .foot-right a:hover { color: var(--dark); }
   opacity: 0.4;
   margin: 4px 20px 32px 20px;
 }
+
+
+/* RIGHT IMAGE */
+.feedback {
+  transform: scale(1.12); 
+}
+
