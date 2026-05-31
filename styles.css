@@ -1746,38 +1746,3 @@ footer .foot-right a:hover { color: var(--dark); }
   background-position: 0% 0;
   transition: opacity 0.6s ease, transform 0.6s ease, background-position 0.6s ease, border-color 0.6s ease;
 }
-
-.section-marquee {
-  overflow: hidden;
-  border-top: 1.5px solid #dbd8d2;
-  border-bottom: 1.5px solid #dbd8d2;
-  background: transparent;
-  padding: 12px 0;
-}
-
-.section-marquee-track {
-  display: flex;
-  gap: 40px;
-  width: max-content;
-  white-space: nowrap;
-  animation: marquee 20s linear infinite;
-}
-
-.section-marquee-track span {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--mid);
-  opacity: 0.89;
-}
-
-/* animation */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
