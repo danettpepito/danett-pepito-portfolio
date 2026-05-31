@@ -1494,37 +1494,6 @@ footer .foot-right a:hover { color: var(--dark); }
   gap: 80px;
 }
 
-/* ── HERE'S HOW ── */
-.heres-how {
-  padding: 80px 80px 0;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.heres-how.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.heres-how-comment {
-  display: block;
-  font-family: monospace;
-  font-size: 0.85rem;
-  color: var(--mid);
-  opacity: 0.5;
-  margin-bottom: 8px;
-}
-
-.heres-how-title {
-  font-size: clamp(3rem, 8vw, 7rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -3px;
-  color: var(--dark);
-}
-
-
 /* ── WORK PROMPT ── */
 .work-prompt {
   display: flex;
