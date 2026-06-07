@@ -67,7 +67,7 @@ nav {
     font-family: var(--font-hand);
     font-size: 1rem;
     color: var(--mid);
-    letter-spacing: -1px;
+
 }
 
 .nav-links {
@@ -1089,7 +1089,7 @@ footer .foot-right a:hover { color: var(--dark); }
 .cs-image-row {
   display: flex;
   gap: 10px;
-  margin-top: 24px;
+  margin-top: 5px;
 }
 
 /* make images behave nicely inside row */
