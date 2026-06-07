@@ -424,3 +424,12 @@ function togglePersona() {
   const dropdown = document.querySelector(".persona-dropdown");
   dropdown.classList.toggle("open");
 }
+
+const marquee = document.querySelector('.cs-marquee');
+
+marquee.addEventListener('wheel', (e) => {
+  if (marquee.matches(':hover')) {
+    e.preventDefault();
+    marquee.scrollLeft += e.deltaY;
+  }
+}, { passive: false });

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Danett | UX Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    /* ── Case Studies Grid ── */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .case-study {
+      border-radius: 16px;
+      padding: 1.4rem 1.3rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 210px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-study:hover {
+      transform: translateY(-3px);
+    }
+
+    .case-study.wide {
+      grid-column: span 2;
+    }
+
+    /* colour overrides — keep your existing vars or use these directly */
+    .case-green  { background: #d5eed4; }
+    .case-orange { background: #fdddb8; }
+    .case-pink   { background: #f4c4d2; }
+    .case-blue   { background: #bcd8f7; }
+    .case-yellow { background: #f7edbd; }
+
+    .case-study-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(0,0,0,0.45);
+      letter-spacing: 0.03em;
+      margin: 0 0 0.45rem;
+    }
+
+    .case-study-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: rgba(0,0,0,0.82);
+      line-height: 1.35;
+      margin: 0 0 0.5rem;
+    }
+
+    .case-study-title strong {
+      color: rgba(0,0,0,0.95);
+    }
+
+    .case-study-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.75rem;
+    }
+
+    .case-study-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 10.5px;
+      color: rgba(0,0,0,0.4);
+      letter-spacing: 0.02em;
+    }
+
+    .case-study-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: rgba(0,0,0,0.55);
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+
+    .case-study:hover .case-study-arrow {
+      background: rgba(0,0,0,0.22);
+    }
+
+    .case-study-emoji {
+      position: absolute;
+      bottom: 1.1rem;
+      right: 1.2rem;
+      font-size: 2.4rem;
+      opacity: 0.18;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .case-study-wip {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      background: rgba(0,0,0,0.1);
+      color: rgba(0,0,0,0.45);
+      padding: 2px 7px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      margin-bottom: 0.4rem;
+    }
+
+    .case-study-wip-title {
+      color: rgba(0,0,0,0.38) !important;
+      font-style: italic;
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+      .case-study.wide {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav>
+    <span class="nav-logo">dvp</span>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <hr>
+
+  <!-- ── Work / Case Studies ── -->
+  <section class="work" id="work">
+
+    <div class="work-grid">
+
+      <!-- Case Study 1 — wide -->
+      <a href="sorta2.html" class="case-study case-green wide">
+        <div>
+          <p class="case-study-tag">Sorta · 2025</p>
+          <h2 class="case-study-title">
+            A bin &amp; <strong>companion app</strong> to help
+            <strong>reduce food waste confusion</strong>
+          </h2>
+        </div>
+        <div class="case-study-meta">
+          <span class="case-study-desc">Service design</span>
+          <span class="case-study-arrow">↗</span>
+        </div>
+        <span class="case-study-emoji" aria-hidden="true">♻️</span>
+      </a>
+
+      <!-- Case Study 2 -->
+      <a href="jumble.html" class="case-study case-orange">
+        <div>
+          <p class="case-study-tag">Jumble · 2025</p>
+          <h2 class="case-study-title">
+            A <strong>platform</strong> for the
+            <strong>messy creative process</strong>
+          </h2>
+        </div>
+        <div class="case-study-meta">
+          <span class="case-study-desc">Process, not perfection</span>
+          <span class="case-study-arrow">↗</span>
+        </div>
+        <span class="case-study-emoji" aria-hidden="true">🎨</span>
+      </a>
+
+      <!-- Case Study 3 -->
+      <a href="outbox.html" class="case-study case-pink">
+        <div>
+          <p class="case-study-tag">Outbox · 2025</p>
+          <h2 class="case-study-title">
+            <strong>Intentional communication</strong>
+            through an <strong>online experience</strong>
+          </h2>
+        </div>
+        <div class="case-study-meta">
+          <span class="case-study-desc">Interaction design</span>
+          <span class="case-study-arrow">↗</span>
+        </div>
+        <span class="case-study-emoji" aria-hidden="true">📝</span>
+      </a>
+
+      <!-- Case Study 4 — WIP -->
+      <a href="data-leak.html" class="case-study case-blue">
+        <div>
+          <span class="case-study-wip"># in progress</span>
+          <p class="case-study-tag">Data Leak · 2026</p>
+          <h2 class="case-study-title case-study-wip-title">coming soon 🐟</h2>
+        </div>
+        <div class="case-study-meta">
+          <span class="case-study-desc">—</span>
+          <span class="case-study-arrow" style="opacity:0.45">↗</span>
+        </div>
+      </a>
+
+      <!-- Case Study 5 — placeholder -->
+      <a href="#" class="case-study case-yellow">
+        <div>
+          <span class="case-study-wip"># next up</span>
+          <p class="case-study-tag">Project 5 · 2026</p>
+          <h2 class="case-study-title case-study-wip-title">in the works...</h2>
+        </div>
+        <div class="case-study-meta">
+          <span class="case-study-desc">—</span>
+          <span class="case-study-arrow" style="opacity:0.45">↗</span>
+        </div>
+      </a>
+
+    </div>
+
+    <br>
+    <br>
+    <h1>with more in the works...</h1>
+
+  </section>
+
+
+  <!-- ── Footer ── -->
+  <footer>
+    <span class="foot-left">Let's Talk!</span>
+    <a href="https://www.websitecarbon.com/website/danettpepito-com/" target="_blank"><span> This website's carbon rating! Yikes... maybe don't include this lol</span></a>
+    <span style="font-size:0.85rem; color: var(--mid);">danett 2026 &#169;</span>
+  </footer>
+
+  <div class="cursor-label">Open Project</div>
+
+</body>
+</html>
