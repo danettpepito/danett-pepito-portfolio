@@ -404,7 +404,7 @@ footer .foot-right a:hover { color: var(--dark); }
 }
 
 .dataleak-image {
-  background: url("assets/data-leak/Screenshot\ 2026-06-07\ at\ 11.05.51.png") center/cover no-repeat;
+  background: url("assets/data-leak/data-leak.png") center/cover no-repeat;
 }
 
 /* SORTA.HTML */
@@ -1563,7 +1563,7 @@ footer .foot-right a:hover { color: var(--dark); }
 .work-grid {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 160px;
 }
 
 /* ── WORK PROMPT ── */
