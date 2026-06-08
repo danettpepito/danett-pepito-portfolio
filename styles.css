@@ -179,6 +179,7 @@ nav {
   gap: 48px;
   align-items: center;
   cursor: default;
+  border-radius: var(--radius);
 }
 
 /* link becomes the clickable wrapper but DOES NOT break grid */
@@ -192,6 +193,7 @@ nav {
 /* optional hover effect on whole section */
 .case-study:hover .case-study-image {
   transform: rotate(0deg) scale(1) !important;
+  border-radius: var(--radius);
 }
 
 /* Alternate layout every other card */
@@ -307,7 +309,7 @@ footer .foot-right a:hover { color: var(--dark); }
 }
 
 .case-study:nth-child(2):hover .case-study-image {
-  outline-color: orange; /* teal */
+  outline-color: blue; /* teal */
 }
 
 .case-study:nth-child(3):hover .case-study-image {
@@ -315,7 +317,7 @@ footer .foot-right a:hover { color: var(--dark); }
 }
 
 .case-study:nth-child(4):hover .case-study-image {
-  outline-color: blue; /* purple */
+  outline-color: orange; /* purple */
 }
 
 .case-green:hover strong {

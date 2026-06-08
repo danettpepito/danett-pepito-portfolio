@@ -15,8 +15,9 @@ const cards = document.querySelectorAll(".case-study");
 
 const colors = [
   "green",
+  "blue",
+  "#FF69B4",
   "orange",
-  "#FF69B4"
 ];
 
 cards.forEach((card, index) => {
