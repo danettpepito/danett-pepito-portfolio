@@ -26,7 +26,7 @@
   --white:    #fffdf7;
   --card-bg:  #fffaf0;
   
-  --radius:   6px;
+  --radius:   3px;
   --font-body:'LineSeed', sans-serif;
   }
 
@@ -1629,7 +1629,7 @@ footer .foot-right a:hover { color: var(--dark); }
   object-fit: cover;
   display: block;
 
-  transform: scale(1.8); 
+  transform: scale(1.5); 
 }
 
 /* RIGHT IMAGE */
@@ -2170,4 +2170,98 @@ footer .foot-right a:hover { color: var(--dark); }
     padding: 48px 32px;
     gap: 32px;
   }
+}
+
+
+/* ── VIEW NEXT ── */
+.cs-next {
+  padding: 80px 60px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cs-next-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-bottom: 24px;
+  letter-spacing: 0.05em;
+}
+
+.cs-next-comment {
+  color: #888;
+}
+
+.cs-next-card {
+  display: block;
+  text-decoration: none;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 40px 48px;
+  background: rgba(255,255,255,0.5);
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cs-next-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 140, 50, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cs-next-card:hover {
+  border-color: orange;
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.cs-next-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cs-next-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: #999;
+}
+
+.cs-next-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  background: rgba(255, 140, 50, 0.12);
+  color: orange;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.cs-next-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 12px;
+  transition: color 0.2s ease;
+}
+
+.cs-next-card:hover .cs-next-title {
+  color: orange;
+}
+
+.cs-next-desc {
+  font-size: 0.95rem;
+  color: #777;
+  max-width: 480px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* push floating nav up so it doesn't overlap the next section */
+.cs-floating-nav {
+  bottom: 32px; /* already set presumably — keep or bump to 40px */
 }
