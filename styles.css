@@ -1802,7 +1802,7 @@ footer .foot-right a:hover { color: var(--dark); }
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: end;
-  padding: 160px 80px 80px;
+  padding: 100px 100px 80px;
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -2261,7 +2261,30 @@ footer .foot-right a:hover { color: var(--dark); }
   margin: 0;
 }
 
+.about-hero-left p,
+.about-hero-right p {
+  margin-bottom: 16px;
+  line-height: 1.75;
+}
+
 /* push floating nav up so it doesn't overlap the next section */
 .cs-floating-nav {
   bottom: 32px; /* already set presumably — keep or bump to 40px */
+}
+
+.scroll-arrow-hero {
+  display: block;
+  width: 50px;
+  height: 50px;
+  color: var(--mid);
+  opacity: 0;
+  animation: bounce 1.6s ease-in-out infinite;
+  transition: opacity 0.6s ease;
+  align-self: center;
+  margin: 80px auto 0; /* 👈 this centers it horizontally */
+}
+
+
+.scroll-arrow-hero.visible {
+  opacity: 0.8;
 }

@@ -413,9 +413,18 @@ setTimeout(() => {
   const cta = document.getElementById("heroScrollCta");
   if (cta) cta.classList.add("visible");
 }, 200 + spans.length * 55 + 600); // waits for the letter-by-letter reveal to finish
+
+setTimeout(() => {
+  const cta = document.getElementById("heroScrollCta");
+  if (cta) cta.classList.add("visible");
+  const arrow = document.querySelector(".scroll-arrow-hero");
+  if (arrow) arrow.classList.add("visible");
+}, 200 + spans.length * 55 + 600);
+
 }
 
 setTimeout(typeIn, 600);
+
 
 
 // kick off after short delay
