@@ -233,7 +233,6 @@ nav {
 
 .case-study-image {
     background: var(--card-bg);
-    border-radius: var(--radius);
     overflow: hidden;
     aspect-ratio: 4 / 3;
     display: flex;
@@ -328,6 +327,10 @@ footer .foot-right a:hover { color: var(--dark); }
 
 .case-pink:hover strong {
   color: #FF69B4;
+}
+
+.case-blue:hover strong {
+  color: blue;
 }
 
 .case-study strong {
@@ -757,7 +760,7 @@ footer .foot-right a:hover { color: var(--dark); }
     justify-content: center;
     gap: 8px;
     background: var(--dark);
-    color: white;
+    color: var(--white);
     border-radius: 3px;
     padding: 14px 24px;
     font-size: 0.85rem;
@@ -765,7 +768,7 @@ footer .foot-right a:hover { color: var(--dark); }
     transition: background 0.2s, transform 0.15s;
   }
   .cs-cta-primary:hover {
-    background: var(--rust);
+    background: var(--yellow);
     transform: translateY(-1px);
   }
   .cs-cta-secondary {
@@ -797,10 +800,10 @@ footer .foot-right a:hover { color: var(--dark); }
   
   .cs-scroll-img {
     width: 100%;
-    border-radius: var(--radius);
     overflow: hidden;
     background: var(--card-bg);
     box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+    margin-top:10px;
   }
   .cs-scroll-img img {
     width: 100%;
@@ -815,10 +818,11 @@ footer .foot-right a:hover { color: var(--dark); }
   
   /* ── FULL BLEED INSIGHT ── */
   .cs-fullbleed {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
     position: relative;
+    width: 100%;
+    margin: 60px 0;
     overflow: hidden;
+    z-index: 1; /* keeps it under floating nav */
   }
   .cs-fullbleed img {
     width: 100%;
@@ -857,8 +861,10 @@ footer .foot-right a:hover { color: var(--dark); }
   /* ── NARRATIVE SECTION ── */
   .cs-narrative {
     padding: 20px 80px;
-    max-width: 1050px;
-    margin: 0 auto;
+    max-width: 1500px;
+    margin: 0 0 0 200px;
+    position: relative;
+    z-index: 1;
   }
   .cs-narrative-eyebrow {
     font-size: 0.72rem;
@@ -922,6 +928,11 @@ footer .foot-right a:hover { color: var(--dark); }
     color: var(--rust);
     font-size: 0.85rem;
   }
+
+  .full-bleed {
+    width: 100%;
+    margin-left: 0;
+  }
   
   /* ── HOW MIGHT WE ── */
   .cs-hmw {
@@ -933,11 +944,10 @@ footer .foot-right a:hover { color: var(--dark); }
     margin-left: calc(50% - 50vw);
   }
   .cs-hmw-label {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    opacity: 0.5;
-    margin-bottom: 20px;
+    position: relative;   /* IMPORTANT: not absolute/fixed */
+    display: inline-block;
+  
+    z-index: 1;
   }
   .cs-hmw-text {
     font-size: clamp(1.8rem, 4vw, 3.2rem);
@@ -1089,15 +1099,23 @@ footer .foot-right a:hover { color: var(--dark); }
 .cs-image-row {
   display: flex;
   gap: 10px;
-  margin-top: 5px;
+  align-items: stretch;
 }
 
-/* make images behave nicely inside row */
 .cs-image-row img {
-  width: 100%;
-  max-width: 50%;
+  flex: 1;
+  width: 0;
   height: auto;
   object-fit: cover;
+  display: block;
+}
+
+.cs-image-row video {
+  flex: 1;
+  width: 0;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   border-radius: var(--radius);
 }
 
@@ -1110,6 +1128,22 @@ footer .foot-right a:hover { color: var(--dark); }
   .cs-image-row img {
     max-width: 100%;
   }
+}
+
+.cs-media-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: stretch;
+}
+
+/* force identical sizing */
+.cs-media-grid img,
+.cs-media-grid video {
+  width: 100%;
+  height: 360px;        /* shared height = key part */
+  object-fit: cover;    /* keeps crop clean */
+  display: block;
 }
 
   
@@ -1130,27 +1164,24 @@ footer .foot-right a:hover { color: var(--dark); }
    FLOATING CASE STUDY NAV
 ──────────────────────────── */
 
+/* ── FLOATING CASE STUDY NAV ── */
 .cs-floating-nav {
   position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(-12px);
 
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 2px;
 
   padding: 10px;
-  background: rgba(255,255,255,0.82);
-
-  backdrop-filter: blur(14px);
-
-  border: 1.5px solid rgba(0,0,0,0.08);
-  border-radius: 3px;
-
-  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
 
   z-index: 999;
-
   opacity: 0;
   pointer-events: none;
 
@@ -1159,48 +1190,55 @@ footer .foot-right a:hover { color: var(--dark); }
     transform 0.35s ease;
 }
 
-/* visible state */
 .cs-floating-nav.show {
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(-50%) translateX(0);
 }
 
-/* nav buttons */
 .cs-floating-nav a {
-  padding: 10px 16px;
-
-  border-radius: 3px;
-
-  font-size: 0.8rem;
+  padding: 6px 24px;
+  border-radius: 0;
+  font-size: 0.72rem;
   font-weight: 600;
-
-  color: var(--dark);
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  white-space: nowrap;
+  transition: color 0.2s ease;
+  background: transparent;
 }
 
-/* hover */
 .cs-floating-nav a:hover {
-  background: var(--dark);
-  color: white;
-
-  transform: translateY(-1px);
+  color: var(--dark);
+  background: transparent;
+  transform: none;
 }
 
-/* mobile */
+.cs-floating-nav a.active {
+  color: var(--dark);
+  background: transparent;
+}
+
+/* mobile — drop back to bottom */
 @media (max-width: 900px) {
   .cs-floating-nav {
+    left: 50%;
+    top: auto;
+    bottom: 24px;
+    transform: translateX(-50%) translateY(20px);
+    flex-direction: row;
     width: calc(100% - 24px);
-
     overflow-x: auto;
-
     justify-content: flex-start;
+  }
 
-    padding: 10px 12px;
+  .cs-floating-nav.show {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .cs-floating-nav a:hover {
+    transform: translateY(-1px);
   }
 
   .cs-floating-nav::-webkit-scrollbar {
