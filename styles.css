@@ -2288,3 +2288,18 @@ footer .foot-right a:hover { color: var(--dark); }
 .scroll-arrow-hero.visible {
   opacity: 0.8;
 }
+
+.cs-video-row {
+  display: flex !important;
+  gap: 10px;
+  width: 100%;
+}
+
+.cs-video-row .cs-video {
+  flex: 1;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  display: block;
+}
