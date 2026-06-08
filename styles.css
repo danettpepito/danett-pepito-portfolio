@@ -1311,9 +1311,9 @@ footer .foot-right a:hover { color: var(--dark); }
     position: absolute;
     left: 50%;
     bottom: 120%;
-    transform: translateX(-50%) scale(0.95);
+    transform: translateX(-50%) scale(0.8);
   
-    width: 600px;   /* 👈 big image */
+    width: 400px;   /* 👈 big image */
     max-width: 60vw;
   
   
