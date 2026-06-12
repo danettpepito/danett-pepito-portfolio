@@ -435,11 +435,25 @@ function togglePersona() {
   dropdown.classList.toggle("open");
 }
 
-const marquee = document.querySelector('.cs-marquee');
+// ── FLOATING NAV — active section highlight ──
+const csNavLinks = document.querySelectorAll(".cs-floating-nav a");
 
-marquee.addEventListener('wheel', (e) => {
-  if (marquee.matches(':hover')) {
-    e.preventDefault();
-    marquee.scrollLeft += e.deltaY;
-  }
-}, { passive: false });
+if (csNavLinks.length) {
+  const sectionIds = ["discover", "define", "clarify", "conceptualise", "outcome"];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      const link = document.querySelector(`.cs-floating-nav a[href="#${id}"]`);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }, { threshold: 0.25 });
+
+  sections.forEach(section => sectionObserver.observe(section));
+}

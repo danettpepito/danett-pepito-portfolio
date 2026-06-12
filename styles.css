@@ -1203,7 +1203,7 @@ footer .foot-right a:hover { color: var(--dark); }
 .cs-floating-nav a {
   padding: 6px 24px;
   border-radius: 0;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1214,15 +1214,40 @@ footer .foot-right a:hover { color: var(--dark); }
 }
 
 .cs-floating-nav a:hover {
-  color: var(--dark);
   background: transparent;
   transform: none;
 }
 
+.cs-floating-nav a[href="#discover"]:hover { color: #e53e3e; }
+.cs-floating-nav a[href="#define"]:hover   { color: #dd6b20; }
+.cs-floating-nav a[href="#clarify"]:hover  { color: #d69e2e; }
+.cs-floating-nav a[href="#conceptualise"]:hover { color: #38a169; }
+.cs-floating-nav a[href="#outcome"]:hover  { color: #3182ce; }
+
+/* ── FLOATING NAV — rainbow active states ── */
 .cs-floating-nav a.active {
-  color: var(--dark);
-  background: transparent;
+  font-weight: 800;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
+
+.cs-floating-nav a.active::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.cs-floating-nav a[href="#discover"].active { color: #e53e8f; }
+.cs-floating-nav a[href="#define"].active   { color: #dd6b20; }
+.cs-floating-nav a[href="#clarify"].active  { color: #d69e2e; }
+.cs-floating-nav a[href="#conceptualise"].active { color: #38a169; }
+.cs-floating-nav a[href="#outcome"].active  { color: #3182ce; }
 
 /* mobile — drop back to bottom */
 @media (max-width: 900px) {
@@ -1295,6 +1320,7 @@ footer .foot-right a:hover { color: var(--dark); }
   nav.show {
     transform: translateY(0);
   }
+
 
   
 
