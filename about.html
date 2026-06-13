@@ -3,72 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>About</title>
+  <title>About | Danett</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="about.css">
   <script src="script.js" defer></script>
 </head>
 <body>
 
   <!-- ── Navigation ── -->
   <nav>
-    <a href="index.html"><span class="nav-logo">Danett Pepito</span></a>
+    <a href="index.html">
+      <img src="assets/logo.png" style="transform: scale(1.2);" alt="danett pepito logo" class="nav-logo">
+    </a>
+  
     <ul class="nav-links">
-      <li><a href="index.html#work">Work</a></li>
+      <li><a href="#work">Work</a></li>
       <li><a href="about.html">About Me</a></li>
     </ul>
   </nav>
 
-  <!-- HERO -->
-  <section class="about-hero">
-    <div class="about-hero-left">
-      <h2>Hi again! I'm Danett.</h2>
-      <br>
-      <p>I'm a Sudoku enthusiast, Ravenclaw, and if I were a cheese I'd be Brie. </p>
-        
-      <p>
-        If that doesn't tell you enough, I'm an extremely curious and forever student with a willingness to learn as much as I can. My approach starts with people, first and foremost, and often ends up with me going down (what I deem, necessary) rabbit holes. I love colours and little pockets of interaction.</p>
-
-      <p> My skillset lies in Figma, HTML, CSS, and Javascript.</p>
-
+  <!-- ── Hero ── -->
+  <section class="ab-hero">
+    <div class="ab-hero-left">
+      <p class="ab-eyebrow"># about</p>
+      <h1 class="ab-heading">Hi, I'm<br><em>Danett.</em></h1>
+      <p>A Sudoku enthusiast, Ravenclaw, and if I were a cheese I'd be Brie.</p>
+      <p>Extremely curious and a forever student. My approach starts with people, first and foremost — and often ends with me going down what I deem necessary rabbit holes. I love colours and little pockets of interaction.</p>
+      <p>My skillset lies in Figma, HTML, CSS, and Javascript.</p>
     </div>
-
-    <div class="about-hero-right">
-      <img src="assets/about-pic.jpg" alt="Danett" class="about-photo">
-      <p class="photo-caption">• Currently buried in a book… or three</p>
-
-      <br> 
-
-      <p>Outside of design I'm probably doing anything I can to get away from the screen; like reading, journaling, or crafting..something. And if all else fails, I'm gaming. Right now, Fortnite and Stardew Valley, probably.</p>
+    <div class="ab-hero-right">
+      <img src="assets/about-pic.jpg" alt="Danett" class="ab-photo">
+      <p class="ab-caption">• Currently buried in a book… or three</p>
     </div>
   </section>
 
-  <!-- FUN FACTS 
-  <section class="about-section">
-    <p class="about-section-label">A little more</p>
-    <div class="facts-grid">
-      <div class="fact-cell">
-        <p class="fact-label">Based in</p>
-        <p class="fact-value">Aotearoa NZ 🇳🇿</p>
-        <p class="fact-sub">born with wanderlust though</p>
+  <hr class="ab-hr">
+
+  <!-- ── Outside of Design ── -->
+  <section class="ab-section">
+    <p class="ab-section-label"># outside of design</p>
+    <p class="ab-body-large">
+      When I'm not designing, I'm doing everything I can to get away from the screen —
+      <strong>reading, journaling, or crafting something</strong> (still figuring out what).
+      I think best when I'm moving, so walks double as brainstorms.
+      And when all else fails, I'm gaming — right now it's
+      <strong>Fortnite and Stardew Valley</strong>, probably at the same time.
+    </p>
+  </section>
+
+  <hr class="ab-hr">
+
+  <!-- ── Tools & Skills ── -->
+  <section class="ab-section">
+    <p class="ab-section-label"># tools & skills</p>
+    <div class="ab-tools-wrap">
+      <div class="ab-tools-group">
+        <p class="ab-tools-sublabel">Proficient in</p>
+        <div class="ab-tags">
+          <span class="ab-tag ab-tag--solid">Figma</span>
+          <span class="ab-tag ab-tag--solid">HTML</span>
+          <span class="ab-tag ab-tag--solid">CSS</span>
+          <span class="ab-tag ab-tag--solid">Illustrator</span>
+          <span class="ab-tag ab-tag--solid">InDesign</span>
+        </div>
       </div>
-      <div class="fact-cell">
-        <p class="fact-label">I think best when</p>
-        <p class="fact-value">I'm moving</p>
-        <p class="fact-sub">walks = brainstorms</p>
-      </div>
-      <div class="fact-cell">
-        <p class="fact-label">Favourite tool</p>
-        <p class="fact-value">Figma</p>
-        <p class="fact-sub">+ a good sticky note session</p>
+      <div class="ab-tools-group">
+        <p class="ab-tools-sublabel">Currently learning</p>
+        <div class="ab-tags">
+          <span class="ab-tag ab-tag--learning">p5.js</span>
+          <span class="ab-tag ab-tag--learning">Rive</span>
+          <span class="ab-tag ab-tag--learning">After Effects</span>
+        </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
+  <hr class="ab-hr">
+
+  <!-- ── UX/UI Specialties ── -->
+  <section class="ab-section">
+    <p class="ab-section-label"># ux/ui specialties</p>
+    <div class="ab-spec-grid">
+      <div class="ab-spec-cell">
+        <p class="ab-spec-num">01</p>
+        <p class="ab-spec-title">UX Research</p>
+        <p class="ab-spec-body">User interviews, usability testing, and synthesising insights from messy, real-world data.</p>
+      </div>
+      <div class="ab-spec-cell">
+        <p class="ab-spec-num">02</p>
+        <p class="ab-spec-title">Interaction Design</p>
+        <p class="ab-spec-body">Crafting flows and micro-interactions that feel intuitive — and just a little delightful.</p>
+      </div>
+      <div class="ab-spec-cell">
+        <p class="ab-spec-num">03</p>
+        <p class="ab-spec-title">Prototyping</p>
+        <p class="ab-spec-body">From lo-fi sketches to coded prototypes — bringing ideas to life fast enough to actually test them.</p>
+      </div>
+      <div class="ab-spec-cell">
+        <p class="ab-spec-num">04</p>
+        <p class="ab-spec-title">Systems Thinking</p>
+        <p class="ab-spec-body">Seeing patterns, asking the right questions, and knowing when to zoom out before zooming in.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Now Strip ── -->
+  <div class="ab-now">
+    <div class="ab-now-item">
+      <p class="ab-now-label"><span class="ab-now-dot"></span>Based in</p>
+      <p class="ab-now-val">Aotearoa NZ 🇳🇿</p>
+      <p class="ab-now-sub">born with wanderlust</p>
+    </div>
+    <div class="ab-now-item">
+      <p class="ab-now-label">Reading</p>
+      <p class="ab-now-val">TBD</p>
+      <p class="ab-now-sub">buried in a book or three</p>
+    </div>
+    <div class="ab-now-item">
+      <p class="ab-now-label">Playing</p>
+      <p class="ab-now-val">Stardew Valley</p>
+      <p class="ab-now-sub">+ Fortnite</p>
+    </div>
+  </div>
 
   <!-- ── Footer ── -->
-  <footer>
-    <span class="foot-left">Let's connect</span>
-    <span style="font-size:0.85rem; color: var(--mid);">Danett 2026 &#169; All Rights Reserved.</span>
+  <footer class="ab-footer">
+    <div class="ab-footer-top">
+      <div class="ab-footer-cta">
+        <p class="ab-eyebrow"># let's work together</p>
+        <h2 class="ab-footer-heading">Got something <em>interesting?</em></h2>
+        <p class="ab-footer-body">Whether it's a project, a collab, or just a chat — my inbox is open. I'm always up for a good design conversation.</p>
+        <a href="mailto:danettpepito@gmail.com" class="ab-footer-btn">Get in touch →</a>
+      </div>
+      <div class="ab-footer-links">
+        <p class="ab-tools-sublabel">Find me at</p>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" class="ab-footer-link">LinkedIn <span>↗</span></a>
+        <a href="https://read.cv" target="_blank" rel="noopener" class="ab-footer-link">Read.cv <span>↗</span></a>
+        <a href="https://github.com" target="_blank" rel="noopener" class="ab-footer-link">GitHub <span>↗</span></a>
+        <a href="mailto:your@email.com" class="ab-footer-link">your@email.com <span>↗</span></a>
+      </div>
+    </div>
+    <div class="ab-footer-bottom">
+      <span>Danett Pepito © 2026 — Designed & built by me</span>
+      <nav class="ab-footer-nav">
+        <a href="index.html#work">Work</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
   </footer>
 
 </body>
