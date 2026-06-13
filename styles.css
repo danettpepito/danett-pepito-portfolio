@@ -2618,11 +2618,52 @@ body:has(.ab-hero) nav {
 }
 
 .ab-tag {
-  padding: 7px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 14px;
   border-radius: 999px;
   font-size: 0.82rem;
   cursor: default;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.ab-tag--red {
+  background: rgba(255, 59, 48, 0.12);
+  border: 1.5px solid #ff3b30;
+  color: #ff3b30;
+}
+
+.ab-tag--orange {
+  background: rgba(255, 149, 0, 0.12);
+  border: 1.5px solid #ff9500;
+  color: #ff9500;
+}
+
+.ab-tag--yellow {
+  background: rgba(255, 204, 0, 0.12);
+  border: 1.5px solid #ffcc00;
+  color: #b8860b;
+}
+
+.ab-tag--green {
+  background: rgba(52, 199, 89, 0.12);
+  border: 1.5px solid #34c759;
+  color: #34c759;
+}
+
+.ab-tag--blue {
+  background: rgba(0, 122, 255, 0.12);
+  border: 1.5px solid #007aff;
+  color: #007aff;
+}
+
+.ab-tag--purple {
+  background: rgba(175, 82, 222, 0.12);
+  border: 1.5px solid #af52de;
+  color: #af52de;
 }
 
 .ab-tag--solid {
