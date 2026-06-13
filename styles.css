@@ -1169,6 +1169,7 @@ footer .foot-right a:hover { color: var(--dark); }
 ──────────────────────────── */
 
 /* ── FLOATING CASE STUDY NAV ── */
+/* ── FLOATING CASE STUDY NAV ── */
 .cs-floating-nav {
   position: fixed;
   left: 0;
@@ -1177,11 +1178,9 @@ footer .foot-right a:hover { color: var(--dark); }
 
   display: flex;
   flex-direction: column;
-  gap: 2px;
 
-  padding: 10px;
+  padding: 4px 0;
   background: transparent;
-  backdrop-filter: none;
   border: none;
   box-shadow: none;
 
@@ -1189,10 +1188,15 @@ footer .foot-right a:hover { color: var(--dark); }
   opacity: 0;
   pointer-events: none;
 
-  transition:
-    opacity 0.35s ease,
-    transform 0.35s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+
+  /* the vertical line */
+  border-left: 2px solid #dbd8d2;
+  margin-left: 32px;
+  width: fit-content;
+height: fit-content;
 }
+
 
 .cs-floating-nav.show {
   opacity: 1;
@@ -1201,57 +1205,44 @@ footer .foot-right a:hover { color: var(--dark); }
 }
 
 .cs-floating-nav a {
-  padding: 6px 24px;
-  border-radius: 0;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  padding: 5px 20px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--mid);
+  color: #c5c0b8;
   white-space: nowrap;
-  transition: color 0.2s ease;
   background: transparent;
-    position: relative;
-  transition: color 0.35s ease;
+  position: relative;
+  transition: color 0.35s ease, font-weight 0.3s ease;
+
+  /* left border tick — hidden by default */
+  border-left: 2px solid transparent;
+  margin-left: -2px;
 }
 
-.cs-floating-nav a:hover {
-  background: transparent;
-  transform: none;
-}
-
+/* hover colours */
+.cs-floating-nav a:hover { background: transparent; transform: none; }
 .cs-floating-nav a[href="#discover"]:hover { color: #e53e3e; }
 .cs-floating-nav a[href="#define"]:hover   { color: #dd6b20; }
 .cs-floating-nav a[href="#clarify"]:hover  { color: #d69e2e; }
 .cs-floating-nav a[href="#conceptualise"]:hover { color: #38a169; }
 .cs-floating-nav a[href="#outcome"]:hover  { color: #3182ce; }
 
-/* ── FLOATING NAV — rainbow active states ── */
+/* active state */
 .cs-floating-nav a.active {
   font-weight: 800;
-  font-size: 0.82rem;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  font-size: 0.78rem;
 }
 
-.cs-floating-nav a.active::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  flex-shrink: 0;
-}
+/* active tick replaces the line segment */
+.cs-floating-nav a[href="#discover"].active { color: #e53e3e; border-left-color: #e53e3e; }
+.cs-floating-nav a[href="#define"].active   { color: #dd6b20; border-left-color: #dd6b20; }
+.cs-floating-nav a[href="#clarify"].active  { color: #d69e2e; border-left-color: #d69e2e; }
+.cs-floating-nav a[href="#conceptualise"].active { color: #38a169; border-left-color: #38a169; }
+.cs-floating-nav a[href="#outcome"].active  { color: #3182ce; border-left-color: #3182ce; }
 
-.cs-floating-nav a[href="#discover"].active { color: #e53e8f; }
-.cs-floating-nav a[href="#define"].active   { color: #dd6b20; }
-.cs-floating-nav a[href="#clarify"].active  { color: #38a169; }
-.cs-floating-nav a[href="#conceptualise"].active { color: #3182ce; }
-.cs-floating-nav a[href="#outcome"].active  { color: #9142ce; }
-
-/* mobile — drop back to bottom */
+/* mobile */
 @media (max-width: 900px) {
   .cs-floating-nav {
     left: 50%;
@@ -1261,20 +1252,21 @@ footer .foot-right a:hover { color: var(--dark); }
     flex-direction: row;
     width: calc(100% - 24px);
     overflow-x: auto;
-    justify-content: flex-start;
+    border-left: none;
+    border-top: 2px solid #dbd8d2;
+    margin-left: 0;
+    padding: 8px 0 0;
   }
 
   .cs-floating-nav.show {
     transform: translateX(-50%) translateY(0);
   }
 
-  .cs-floating-nav a:hover {
-    transform: translateY(-1px);
+  .cs-floating-nav a {
+    border-left: none;
   }
 
-  .cs-floating-nav::-webkit-scrollbar {
-    display: none;
-  }
+  .cs-floating-nav::-webkit-scrollbar { display: none; }
 }
 
 
