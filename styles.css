@@ -305,15 +305,15 @@ footer .foot-right a:hover { color: var(--dark); }
 
 /* different colours per case study */
 .case-study:nth-child(1):hover .case-study-image {
-  outline-color: green; /* rust */
+  outline-color: blue; /* rust */
 }
 
 .case-study:nth-child(2):hover .case-study-image {
-  outline-color: blue; /* teal */
+  outline-color: #FF69B4; /* teal */
 }
 
 .case-study:nth-child(3):hover .case-study-image {
-  outline-color: #FF69B4; /* purple */
+  outline-color: green; /* purple */
 }
 
 .case-study:nth-child(4):hover .case-study-image {
@@ -1247,9 +1247,9 @@ footer .foot-right a:hover { color: var(--dark); }
 
 .cs-floating-nav a[href="#discover"].active { color: #e53e8f; }
 .cs-floating-nav a[href="#define"].active   { color: #dd6b20; }
-.cs-floating-nav a[href="#clarify"].active  { color: #d69e2e; }
-.cs-floating-nav a[href="#conceptualise"].active { color: #38a169; }
-.cs-floating-nav a[href="#outcome"].active  { color: #3182ce; }
+.cs-floating-nav a[href="#clarify"].active  { color: #38a169; }
+.cs-floating-nav a[href="#conceptualise"].active { color: #3182ce; }
+.cs-floating-nav a[href="#outcome"].active  { color: #9142ce; }
 
 /* mobile — drop back to bottom */
 @media (max-width: 900px) {

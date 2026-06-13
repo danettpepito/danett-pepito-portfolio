@@ -14,9 +14,9 @@ const cursor = document.querySelector(".cursor-label");
 const cards = document.querySelectorAll(".case-study");
 
 const colors = [
-  "green",
   "blue",
   "#FF69B4",
+  "green",
   "orange",
 ];
 
