@@ -1211,6 +1211,8 @@ footer .foot-right a:hover { color: var(--dark); }
   white-space: nowrap;
   transition: color 0.2s ease;
   background: transparent;
+    position: relative;
+  transition: color 0.35s ease;
 }
 
 .cs-floating-nav a:hover {
@@ -2328,4 +2330,59 @@ footer .foot-right a:hover { color: var(--dark); }
   object-fit: cover;
   border-radius: var(--radius);
   display: block;
+}
+
+/* ── PROTOTYPE BUTTON ── */
+.proto-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 28px;
+  border-radius: 999px;
+  border: 2px solid var(--dark);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--dark);
+  text-decoration: none;
+  margin-top: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease, border-color 0.4s ease;
+  background: transparent;
+}
+
+.proto-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #e53e3e, #dd6b20, #d69e2e, #38a169, #3182ce);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease, background-position 0.6s ease;
+  z-index: 0;
+}
+
+.proto-btn:hover::before {
+  opacity: 1;
+  background-position: 100% 0;
+}
+
+.proto-btn:hover {
+  color: white;
+  border-color: transparent;
+}
+
+.proto-btn-text,
+.proto-btn-arrow {
+  position: relative;
+  z-index: 1;
+}
+
+.proto-btn-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.proto-btn:hover .proto-btn-arrow {
+  transform: translate(2px, -2px);
 }

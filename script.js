@@ -439,21 +439,31 @@ function togglePersona() {
 const csNavLinks = document.querySelectorAll(".cs-floating-nav a");
 
 if (csNavLinks.length) {
-  const sectionIds = ["discover", "define", "clarify", "conceptualise", "outcome"];
-  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
-
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const id = entry.target.id;
-      const link = document.querySelector(`.cs-floating-nav a[href="#${id}"]`);
-      if (!link) return;
-      if (entry.isIntersecting) {
-        link.classList.add("active");
-      } else {
-        link.classList.remove("active");
+  const sections = document.querySelectorAll(
+    "#discover, #define, #clarify, #conceptualise, #outcome"
+  );
+  
+  window.addEventListener("scroll", () => {
+    let current = "";
+  
+    sections.forEach(section => {
+      const top = section.offsetTop - 200;
+  
+      if (window.scrollY >= top) {
+        current = section.id;
       }
     });
-  }, { threshold: 0.25 });
+  
+    document
+      .querySelectorAll(".cs-floating-nav a")
+      .forEach(link => {
+        link.classList.remove("active");
+  
+        if (link.getAttribute("href") === `#${current}`) {
+          link.classList.add("active");
+        }
+      });
+  });
 
   sections.forEach(section => sectionObserver.observe(section));
 }
