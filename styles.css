@@ -2378,3 +2378,90 @@ height: fit-content;
 .proto-btn:hover .proto-btn-arrow {
   transform: translate(2px, -2px);
 }
+
+
+/* ── NEXT CASE STUDY GRID ── */
+.cs-next-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #dbd8d2;
+  border: 1.5px solid #dbd8d2;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 48px;
+}
+
+.cs-next-col {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s ease;
+}
+
+.cs-next-col:hover { background: var(--white); }
+
+.cs-next-col-img {
+  width: 100%;
+  height: 275px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+  transform-origin: center;
+}
+
+.cs-next-col:hover .cs-next-col-img { transform: scale(1.01); }
+
+.cs-next-col-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 32px 32px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.cs-next-col-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mid);
+}
+
+.cs-next-col-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--dark);
+  letter-spacing: -1px;
+  transition: color 0.2s ease;
+}
+
+/* replace with these: */
+.cs-next-col[href="data-leak.html"]:hover .cs-next-col-title { color: blue; }
+.cs-next-col[href="outbox.html"]:hover .cs-next-col-title    { color: #FF69B4; }
+.cs-next-col[href="sorta2.html"]:hover .cs-next-col-title    { color: green; }
+.cs-next-col[href="jumble.html"]:hover .cs-next-col-title    { color: orange; }
+
+.cs-next-col-desc {
+  font-size: 0.9rem;
+  color: var(--mid);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.cs-next-col-arrow {
+  font-size: 1.2rem;
+  color: var(--mid);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.cs-next-col:hover .cs-next-col-arrow {
+  transform: translateX(4px);
+  color: var(--dark);
+}
+
+@media (max-width: 600px) {
+  .cs-next-grid { grid-template-columns: 1fr; }
+}
