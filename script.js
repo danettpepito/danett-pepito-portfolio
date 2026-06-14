@@ -49,11 +49,11 @@ if (canvas) {
   const PADDING = 24;
 
   const COLOURS = [
-    "255, 80, 140",
-    "255, 180, 60",
-    "80, 160, 255",
-    "80, 230, 160",
-    "170, 110, 255",
+    "255, 99, 132",   // hot pink
+    "255, 140, 66",   // orange
+    "255, 189, 89",   // warm gold
+    "255, 218, 121",  // pale yellow
+    "195, 119, 255",  // violet
   ];
 
   const WORDS = [
@@ -113,7 +113,7 @@ if (canvas) {
           vy: (Math.random() - 0.5) * 0.4,
           r:  Math.random() * 4 + 2.5,
           color: COLOURS[Math.floor(Math.random() * COLOURS.length)],
-          wordIndex: Math.random() < 0.5
+          wordIndex: Math.random() < 0.2 // Trigger label
             ? Math.floor(Math.random() * wordLabels.length)
             : null,
         });
@@ -510,3 +510,133 @@ window.addEventListener("scroll", () => {
     nav.classList.remove("scrolled");
   }
 });
+
+// BRUSH
+
+function initRevealCanvas(el) {
+  const canvas = document.createElement('canvas');
+  canvas.classList.add('reveal-canvas');
+  el.insertBefore(canvas, el.firstChild);
+  const ctx = canvas.getContext('2d');
+
+  let revealed = [];
+  let animating = false;
+  let lastX = 0, lastY = 0;
+  let velX = 0, velY = 0;
+
+  function resize() {
+    canvas.width = el.offsetWidth;
+    canvas.height = el.offsetHeight;
+    render();
+  }
+
+  function render() {
+    const w = canvas.width, h = canvas.height;
+
+    const mask = document.createElement('canvas');
+    mask.width = w; mask.height = h;
+    const mctx = mask.getContext('2d');
+
+    mctx.globalCompositeOperation = 'source-over';
+
+    revealed.forEach(p => {
+      mctx.save();
+      mctx.translate(p.x, p.y);
+      mctx.rotate(p.angle || 0);
+      // stretch ellipse in direction of velocity
+      mctx.scale(1 + p.stretch, 1);
+      mctx.rotate(-(p.angle || 0));
+
+      const grd = mctx.createRadialGradient(0, 0, 0, 0, 0, p.r);
+      grd.addColorStop(0,    `rgba(0,0,0,${p.opacity * 0.55})`);
+      grd.addColorStop(0.35, `rgba(0,0,0,${p.opacity * 0.3})`);
+      grd.addColorStop(0.7,  `rgba(0,0,0,${p.opacity * 0.1})`);
+      grd.addColorStop(1,    'rgba(0,0,0,0)');
+      mctx.fillStyle = grd;
+      mctx.beginPath();
+      mctx.arc(0, 0, p.r, 0, Math.PI * 2);
+      mctx.fill();
+      mctx.restore();
+    });
+
+    ctx.clearRect(0, 0, w, h);
+
+    const grad = ctx.createLinearGradient(0, 0, w, h);
+grad.addColorStop(0, '#ffe6a7');
+grad.addColorStop(0.4, '#ffc8d8');
+grad.addColorStop(0.7, '#ffabc4');
+grad.addColorStop(1, '#ffd89c');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.globalCompositeOperation = 'destination-in';
+    ctx.drawImage(mask, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  function fadeOut() {
+    if (!animating) return;
+    let alive = false;
+    revealed = revealed.map(p => {
+      // drift slightly as it fades — water dissipating
+      const drift = 0.4;
+      return {
+        ...p,
+        x: p.x + (Math.random() - 0.5) * drift,
+        y: p.y + (Math.random() - 0.5) * drift,
+        r: p.r * 1.015,           // expand slightly as it fades
+        opacity: p.opacity * 0.96, // fade out slowly
+        stretch: p.stretch * 0.95,
+      };
+    }).filter(p => p.opacity > 0.015);
+
+    alive = revealed.length > 0;
+    render();
+
+    if (alive) {
+      requestAnimationFrame(fadeOut);
+    } else {
+      animating = false;
+    }
+  }
+
+  el.addEventListener('mousemove', e => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    velX = x - lastX;
+    velY = y - lastY;
+    lastX = x; lastY = y;
+
+    const speed = Math.sqrt(velX * velX + velY * velY);
+    const angle = Math.atan2(velY, velX);
+    const stretch = Math.min(speed * 0.08, 1); // stretch more when moving fast
+
+    for (let i = 0; i < 5; i++) {
+      const scatter = 50;
+      revealed.push({
+        x: x + (Math.random() - 0.5) * scatter,
+        y: y + (Math.random() - 0.5) * scatter,
+        r: 160 + Math.random() * 80,
+        opacity: 0.7 + Math.random() * 0.3,
+        angle,
+        stretch,
+      });
+    }
+
+    if (revealed.length > 300) revealed.shift();
+    animating = false;
+    render();
+  });
+
+  el.addEventListener('mouseleave', () => {
+    animating = true;
+    fadeOut();
+  });
+
+  new ResizeObserver(resize).observe(el);
+  resize();
+}
+
+document.querySelectorAll('nav, footer').forEach(initRevealCanvas);
