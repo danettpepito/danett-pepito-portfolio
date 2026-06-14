@@ -36,7 +36,7 @@ cards.forEach((card, index) => {
   });
 });
 
-// ── HERO CANVAS DOTS ──
+// ── HERO CANVAS STARS ──
 const canvas = document.getElementById("heroCanvas");
 if (canvas) {
   const ctx = canvas.getContext("2d");
@@ -49,11 +49,11 @@ if (canvas) {
   const PADDING = 24;
 
   const COLOURS = [
-    "255, 80, 140",   // hot pink
-    "255, 180, 60",   // warm amber
-    "80, 160, 255",   // electric blue
-    "80, 230, 160",   // mint green
-    "170, 110, 255",  // violet
+    "255, 80, 140",
+    "255, 180, 60",
+    "80, 160, 255",
+    "80, 230, 160",
+    "170, 110, 255",
   ];
 
   const WORDS = [
@@ -61,7 +61,6 @@ if (canvas) {
     "strategic thinking"
   ];
 
-  // word labels that float at intersection points
   const wordLabels = WORDS.map((word, i) => ({
     word,
     opacity: 1,
@@ -116,10 +115,24 @@ if (canvas) {
           color: COLOURS[Math.floor(Math.random() * COLOURS.length)],
           wordIndex: Math.random() < 0.5
             ? Math.floor(Math.random() * wordLabels.length)
-            : null, // only ~15% of dots carry a word
+            : null,
         });
       }
     }
+  }
+
+  function drawStar(x, y, size, color, alpha) {
+    const s = size;
+    const t = 0.18;
+    ctx.beginPath();
+    ctx.moveTo(x, y - s);
+    ctx.bezierCurveTo(x + s * t, y - s * t, x + s * t, y - s * t, x + s, y);
+    ctx.bezierCurveTo(x + s * t, y + s * t, x + s * t, y + s * t, x, y + s);
+    ctx.bezierCurveTo(x - s * t, y + s * t, x - s * t, y + s * t, x - s, y);
+    ctx.bezierCurveTo(x - s * t, y - s * t, x - s * t, y - s * t, x, y - s);
+    ctx.closePath();
+    ctx.fillStyle = `rgba(${color}, ${alpha})`;
+    ctx.fill();
   }
 
   let frameCount = 0;
@@ -142,7 +155,6 @@ if (canvas) {
       }
     });
 
-    // reset word target opacities
     wordLabels.forEach(w => { w.targetOpacity = 0; });
 
     dots.forEach((d, i) => {
@@ -165,7 +177,6 @@ if (canvas) {
               ctx.lineTo(d2.x, d2.y);
               ctx.stroke();
 
-              // if either dot carries a word, show it at the midpoint
               const wordDot = d.wordIndex !== null ? d : (d2.wordIndex !== null ? d2 : null);
               if (wordDot) {
                 const label = wordLabels[wordDot.wordIndex];
@@ -190,15 +201,14 @@ if (canvas) {
         }
       }
 
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      ctx.fillStyle = nearMouse
-        ? `rgba(${d.color}, 0.75)`
-        : `rgba(136, 136, 132, 0.05)`;
-      ctx.fill();
+      drawStar(
+        d.x, d.y,
+        d.r * 1.8,
+        nearMouse ? d.color : "136, 136, 132",
+        nearMouse ? 0.75 : 0.08
+      );
     });
 
-    // draw word labels — smoothly fade toward target
     wordLabels.forEach(label => {
       label.opacity += (label.targetOpacity - label.opacity) * 0.08;
 
