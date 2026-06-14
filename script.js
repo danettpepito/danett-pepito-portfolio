@@ -201,11 +201,34 @@ if (canvas) {
         }
       }
 
+      function drawStar(x, y, size, color1, color2, alpha) {
+        const s = size;
+        const t = 0.18;
+    
+        ctx.beginPath();
+        ctx.moveTo(x, y - s);
+        ctx.bezierCurveTo(x + s * t, y - s * t, x + s * t, y - s * t, x + s, y);
+        ctx.bezierCurveTo(x + s * t, y + s * t, x + s * t, y + s * t, x, y + s);
+        ctx.bezierCurveTo(x - s * t, y + s * t, x - s * t, y + s * t, x - s, y);
+        ctx.bezierCurveTo(x - s * t, y - s * t, x - s * t, y - s * t, x, y - s);
+        ctx.closePath();
+    
+        const grad = ctx.createLinearGradient(x - s, y - s, x + s, y + s);
+        grad.addColorStop(0, `rgba(${color1}, ${alpha})`);
+        grad.addColorStop(1, `rgba(${color2}, ${alpha})`);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+      
+      // pick a second colour that's different from the first
+      const color2 = COLOURS[(COLOURS.indexOf(d.color) + 2) % COLOURS.length];
+
       drawStar(
         d.x, d.y,
         d.r * 1.8,
         nearMouse ? d.color : "136, 136, 132",
-        nearMouse ? 0.75 : 0.08
+        nearMouse ? color2  : "180, 175, 168",
+        nearMouse ? 0.75 : 0.1
       );
     });
 
@@ -477,3 +500,13 @@ if (csNavLinks.length) {
 
   sections.forEach(section => sectionObserver.observe(section));
 }
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 100) {
+    nav.classList.add("show");
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("show");
+    nav.classList.remove("scrolled");
+  }
+});

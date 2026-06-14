@@ -60,14 +60,10 @@ img { display: block; max-width: 100%; }
 
 /* ── Nav ── */
 nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 48px;
-  backdrop-filter: blur(10px);
+  background: rgba(251, 246, 234, 0.88);
+  backdrop-filter: none;
+  padding: 1.2rem 2.5rem;
+  transform: translateY(0);
 }
 
 .nav-logo {
@@ -257,33 +253,142 @@ body:has(.about-hero) nav {
     box-shadow: 0 8px 40px rgba(0,0,0,0.08);
 }
 
-/* ── Footer ── */
+/* ── FOOTER ── */
 footer {
-    padding: 60px 80px;
-    border-top: 1.5px solid #dbd8d2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  position: relative;
+  padding: 72px 80px 40px;
+  border-top: 1.5px solid #dbd8d2;
+  overflow: hidden;
 }
 
-footer .foot-left {
-    font-family: var(--font-hand);
-    font-size: 1.4rem;
-    color: var(--dark);
+/* rainbow blob — left side, fades out */
+.footer-rainbow {
+  position: absolute;
+  top: 0;
+  left: -40px;
+  width: 550px;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.45) 0%,
+    rgba(250, 204, 21, 0.38) 20%,
+    rgba(74, 222, 128, 0.32) 40%,
+    transparent 100%
+  );
+  filter: blur(32px);
+  pointer-events: none;
+  z-index: 0;
 }
 
-footer .foot-right {
-    display: flex;
-    gap: 24px;
+.footer-rainbow-right {
+  position: absolute;
+  top: 0;
+  right: -40px;
+  width: 550px;
+  height: 100%;
+  background: linear-gradient(
+    -135deg,
+    rgba(244, 114, 182, 0.45) 0%,
+    rgba(192, 132, 252, 0.32) 40%,
+    rgba(250, 204, 21, 0.22) 80%,
+    transparent 100%
+  );
+  filter: blur(32px);
+  pointer-events: none;
+  z-index: 0;
 }
 
-footer .foot-right a {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--mid);
+.footer-top {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-bottom: 56px;
 }
 
-footer .foot-right a:hover { color: var(--dark); }
+.footer-eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mid);
+  opacity: 0.6;
+  margin-bottom: 12px;
+  font-family: monospace;
+}
+
+.footer-heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  color: var(--dark);
+  margin-bottom: 24px;
+}
+
+.footer-email {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--dark);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-email:hover {
+  color: var(--mid);
+  border-color: var(--mid);
+}
+
+.footer-links-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mid);
+  opacity: 0.55;
+  margin-bottom: 12px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #dbd8d2;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dark);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:first-of-type { border-top: 1px solid #dbd8d2; }
+
+.footer-link span {
+  font-size: 0.8rem;
+  color: var(--mid);
+  transition: transform 0.2s ease;
+}
+
+.footer-link:hover { color: var(--mid); }
+.footer-link:hover span { transform: translate(2px, -2px); }
+
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #dbd8d2;
+  padding-top: 24px;
+}
 
 
 /* ── WONKY IMAGE HOVER ── */
@@ -614,8 +719,8 @@ footer .foot-right a:hover { color: var(--dark); }
   
   /* ── NAV overrides ── */
   nav {
-    background: rgba(240, 237, 232, 0.85);
-    backdrop-filter: blur(12px);
+    background: rgba(251, 246, 234, 0.88);
+    backdrop-filter: none;
     padding: 1.2rem 2.5rem;
     transform: translateY(0);
   }
@@ -624,8 +729,7 @@ footer .foot-right a:hover { color: var(--dark); }
   .nav-back {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--mid);
-    border: 1.5px solid #ccc9c3;
+    background: rgba(251, 246, 234, 0.88);
     border-radius: 5px;
     padding: 8px 18px;
     transition: color 0.2s, border-color 0.2s;
@@ -1304,6 +1408,8 @@ height: fit-content;
     }
   }
 
+
+  /*FIX HERE REAL NAV BAR */
   nav {
     position: fixed;
     top: 0;
@@ -1314,20 +1420,62 @@ height: fit-content;
     justify-content: space-between;
   
     padding: 1.5rem 2rem;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    background: transparent;
+    backdrop-filter: none;
   
     transform: translateY(-100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
   
     z-index: 1000;
   }
   
-  /* visible state */
   nav.show {
     transform: translateY(0);
   }
-
+  
+  nav.scrolled {
+    background: rgba(251, 246, 234, 0.82);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 rgba(219, 216, 210, 0.6);
+  }
+  
+  nav.scrolled::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40px;
+    width: 400px;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(249, 115, 22, 0.45) 0%,
+      rgba(250, 204, 21, 0.38) 20%,
+      rgba(192, 132, 252, 0.22) 80%,
+      transparent 100%
+    );
+    filter: blur(24px);
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  nav.scrolled::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -40px;
+    width: 400px;
+    height: 100%;
+    background: linear-gradient(
+      -135deg,
+      rgba(244, 114, 182, 0.45) 0%,
+      rgba(192, 132, 252, 0.32) 40%,
+      rgba(250, 204, 21, 0.22) 80%,
+      transparent 100%
+    );
+    filter: blur(24px);
+    pointer-events: none;
+    z-index: -1;
+  }
 
   
 
