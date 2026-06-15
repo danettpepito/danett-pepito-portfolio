@@ -391,7 +391,7 @@ footer {
 }
 
 .case-study:nth-child(4):hover .case-study-image {
-  outline-color: orange; /* purple */
+  outline-color: rgb(128, 0, 255); /* purple */
 }
 
 .case-green:hover strong {
@@ -399,7 +399,7 @@ footer {
 }
 
 .case-orange:hover strong {
-  color: orange;
+  color: rgb(128, 0, 255);
 }
 
 .case-pink:hover strong {
@@ -470,7 +470,7 @@ footer {
   }
 
 .jumble-image {
-    background: url("assets/jumble/Screenshot\ 2026-05-10\ at\ 13.41.20.png") center/cover no-repeat;
+    background: url("assets/Screenshot\ 2026-06-11\ at\ 00.43.35.jpeg") center/cover no-repeat;
 }
 
 .outbox-image {
@@ -3209,3 +3209,4 @@ body:has(.ab-hero) nav {
 .ab-mk--pink .ab-mk-bg   { background: #fce4ee; }
 .ab-mk--blue .ab-mk-bg   { background: #dceeff; }
 .ab-mk--yellow .ab-mk-bg { background: #fef3c7; }
+

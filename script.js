@@ -17,7 +17,7 @@ const colors = [
   "blue",
   "#FF69B4",
   "green",
-  "orange",
+  "purple",
 ];
 
 cards.forEach((card, index) => {
@@ -641,5 +641,30 @@ document.querySelectorAll('.ab-instinct-row').forEach(row => {
   const color = row.dataset.color;
   row.addEventListener('mouseenter', () => {
     row.style.setProperty('--row-color', color);
+  });
+});
+
+cards.forEach((card, index) => {
+  const href = card.getAttribute("href") || card.querySelector("a")?.getAttribute("href");
+  const isLocked = !href || href === "";
+
+  card.addEventListener("mouseenter", () => {
+    if (isLocked) {
+      cursor.textContent = "🔒 Locked";
+      cursor.style.opacity = 1;
+      cursor.style.background = "#888";
+    } else {
+      cursor.textContent = "Open Project";
+      cursor.style.opacity = 1;
+      cursor.style.background = colors[index];
+    }
+  });
+
+  card.addEventListener("mouseleave", () => {
+    cursor.style.opacity = 0;
+  });
+
+  card.addEventListener("mousemove", (e) => {
+    cursor.style.transform = `translate(${e.clientX + 12}px, ${e.clientY + 12}px)`;
   });
 });
