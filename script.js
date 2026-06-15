@@ -635,3 +635,11 @@ function initRevealCanvas(el) {
 }
 
 document.querySelectorAll('nav, footer').forEach(initRevealCanvas);
+
+// ── INSTINCT ROW COLOURS ──
+document.querySelectorAll('.ab-instinct-row').forEach(row => {
+  const color = row.dataset.color;
+  row.addEventListener('mouseenter', () => {
+    row.style.setProperty('--row-color', color);
+  });
+});

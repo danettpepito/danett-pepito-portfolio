@@ -3082,28 +3082,56 @@ body:has(.ab-hero) nav {
   gap: 0;
   padding: 40px 80px;
   border-top: 1.5px solid #dbd8d2;
-  background: transparent;
-  transition: background 0.35s ease;
   cursor: default;
+  position: relative;
+  overflow: hidden;
 }
 
 .ab-instinct-row:last-child {
   border-bottom: 1.5px solid #dbd8d2;
 }
 
-.ab-instinct-row.ab-instinct--active,
-.ab-instinct-row:hover {
+/* the flood layer */
+.ab-instinct-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: var(--row-color, #f0ece3);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+}
+
+.ab-instinct-row:hover::before {
+  transform: scaleX(1);
+}
+
+/* keep content above the flood */
+.ab-instinct-row > * {
+  position: relative;
+  z-index: 1;
 }
 
 .ab-instinct-num {
   font-size: 0.7rem;
   color: var(--mid);
-  opacity: 0.5;
+  opacity: 0.4;
   letter-spacing: 0.1em;
   align-self: start;
   padding-top: 6px;
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
+
+.ab-instinct-row:hover .ab-instinct-num {
+  opacity: 1;
+}
+
+/* per-row number accent colours */
+.ab-instinct-row[data-color="#c8f0d0"]:hover .ab-instinct-num { color: #38a169; }
+.ab-instinct-row[data-color="#fde8cc"]:hover .ab-instinct-num { color: #dd6b20; }
+.ab-instinct-row[data-color="#fce4ee"]:hover .ab-instinct-num { color: #d53f8c; }
+.ab-instinct-row[data-color="#dceeff"]:hover .ab-instinct-num { color: #3182ce; }
 
 .ab-instinct-word {
   font-size: clamp(2rem, 5vw, 4rem);
@@ -3112,7 +3140,11 @@ body:has(.ab-hero) nav {
   line-height: 1.0;
   color: var(--dark);
   margin-bottom: 12px;
-  transition: color 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ab-instinct-row:hover .ab-instinct-word {
+  transform: translateX(6px);
 }
 
 .ab-instinct-desc {
@@ -3123,10 +3155,9 @@ body:has(.ab-hero) nav {
   opacity: 0;
   max-height: 0;
   overflow: hidden;
-  transition: opacity 0.3s ease, max-height 0.35s ease;
+  transition: opacity 0.25s ease 0.1s, max-height 0.35s ease;
 }
 
-.ab-instinct-row.ab-instinct--active .ab-instinct-desc,
 .ab-instinct-row:hover .ab-instinct-desc {
   opacity: 1;
   max-height: 80px;
@@ -3142,7 +3173,6 @@ body:has(.ab-hero) nav {
     padding: 0 32px;
   }
 }
-
 /* ── OUTSIDE OF DESIGN ── */
 .ab-outside-text {
   font-size: clamp(1.4rem, 3vw, 2.2rem);
