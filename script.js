@@ -522,31 +522,32 @@ function initRevealCanvas(el) {
   let revealed = [];
   let animating = false;
   let lastX = 0, lastY = 0;
-  let velX = 0, velY = 0;
+  let lastMoveTime = 0;
+  let rafPending = false;
+
+  // persistent offscreen mask — reuse instead of recreating
+  const mask = document.createElement('canvas');
+  const mctx = mask.getContext('2d');
 
   function resize() {
-    canvas.width = el.offsetWidth;
+    canvas.width  = el.offsetWidth;
     canvas.height = el.offsetHeight;
+    mask.width    = el.offsetWidth;
+    mask.height   = el.offsetHeight;
     render();
   }
 
   function render() {
+    rafPending = false;
     const w = canvas.width, h = canvas.height;
 
-    const mask = document.createElement('canvas');
-    mask.width = w; mask.height = h;
-    const mctx = mask.getContext('2d');
-
-    mctx.globalCompositeOperation = 'source-over';
-
+    mctx.clearRect(0, 0, w, h);
     revealed.forEach(p => {
       mctx.save();
       mctx.translate(p.x, p.y);
       mctx.rotate(p.angle || 0);
-      // stretch ellipse in direction of velocity
       mctx.scale(1 + p.stretch, 1);
       mctx.rotate(-(p.angle || 0));
-
       const grd = mctx.createRadialGradient(0, 0, 0, 0, 0, p.r);
       grd.addColorStop(0,    `rgba(0,0,0,${p.opacity * 0.55})`);
       grd.addColorStop(0.35, `rgba(0,0,0,${p.opacity * 0.3})`);
@@ -560,79 +561,73 @@ function initRevealCanvas(el) {
     });
 
     ctx.clearRect(0, 0, w, h);
-
     const grad = ctx.createLinearGradient(0, 0, w, h);
-grad.addColorStop(0, '#ffe6a7');
-grad.addColorStop(0.4, '#ffc8d8');
-grad.addColorStop(0.7, '#ffabc4');
-grad.addColorStop(1, '#ffd89c');
+    grad.addColorStop(0,   '#ffe6a7');
+    grad.addColorStop(0.4, '#ffc8d8');
+    grad.addColorStop(0.7, '#ffabc4');
+    grad.addColorStop(1,   '#ffd89c');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
-
     ctx.globalCompositeOperation = 'destination-in';
     ctx.drawImage(mask, 0, 0);
     ctx.globalCompositeOperation = 'source-over';
   }
 
-  function fadeOut() {
+  function scheduleRender() {
+    if (!rafPending) {
+      rafPending = true;
+      requestAnimationFrame(render);
+    }
+  }
+
+  function fadeLoop() {
     if (!animating) return;
-    let alive = false;
-    revealed = revealed.map(p => {
-      // drift slightly as it fades — water dissipating
-      const drift = 0.4;
-      return {
-        ...p,
-        x: p.x + (Math.random() - 0.5) * drift,
-        y: p.y + (Math.random() - 0.5) * drift,
-        r: p.r * 1.015,           // expand slightly as it fades
-        opacity: p.opacity * 0.96, // fade out slowly
-        stretch: p.stretch * 0.95,
-      };
-    }).filter(p => p.opacity > 0.015);
-
-    alive = revealed.length > 0;
-    render();
-
-    if (alive) {
-      requestAnimationFrame(fadeOut);
+    revealed = revealed
+      .map(p => ({ ...p, r: p.r * 1.012, opacity: p.opacity * 0.94, stretch: p.stretch * 0.95 }))
+      .filter(p => p.opacity > 0.015);
+    scheduleRender();
+    if (revealed.length > 0) {
+      requestAnimationFrame(fadeLoop);
     } else {
       animating = false;
     }
   }
 
   el.addEventListener('mousemove', e => {
+    const now = Date.now();
+    if (now - lastMoveTime < 16) return;
+    lastMoveTime = now;
+
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
-    velX = x - lastX;
-    velY = y - lastY;
+    const velX = x - lastX;
+    const velY = y - lastY;
     lastX = x; lastY = y;
 
-    const speed = Math.sqrt(velX * velX + velY * velY);
-    const angle = Math.atan2(velY, velX);
-    const stretch = Math.min(speed * 0.08, 1); // stretch more when moving fast
+    const speed  = Math.sqrt(velX * velX + velY * velY);
+    const angle   = Math.atan2(velY, velX);
+    const stretch = Math.min(speed * 0.08, 1);
 
-    for (let i = 0; i < 5; i++) {
-      const scatter = 50;
+    for (let i = 0; i < 3; i++) {
       revealed.push({
-        x: x + (Math.random() - 0.5) * scatter,
-        y: y + (Math.random() - 0.5) * scatter,
-        r: 160 + Math.random() * 80,
+        x: x + (Math.random() - 0.5) * 30,
+        y: y + (Math.random() - 0.5) * 30,
+        r: 120 + Math.random() * 60,
         opacity: 0.7 + Math.random() * 0.3,
         angle,
         stretch,
       });
     }
 
-    if (revealed.length > 300) revealed.shift();
+    if (revealed.length > 80) revealed.splice(0, revealed.length - 80);
     animating = false;
-    render();
+    scheduleRender();
   });
 
   el.addEventListener('mouseleave', () => {
     animating = true;
-    fadeOut();
+    fadeLoop();
   });
 
   new ResizeObserver(resize).observe(el);
