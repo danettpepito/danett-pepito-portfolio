@@ -391,7 +391,7 @@ footer {
 }
 
 .case-study:nth-child(4):hover .case-study-image {
-  outline-color: rgb(128, 0, 255); /* purple */
+  outline-color: #730fd6; /* purple */
 }
 
 .case-green:hover strong {
@@ -2787,8 +2787,8 @@ body:has(.ab-hero) nav {
 
 .ab-tag--purple {
   background: rgba(175, 82, 222, 0.12);
-  border: 1.5px solid #af52de;
-  color: #af52de;
+  border: 1.5px solid #730fd6;
+  color: #730fd6;
 }
 
 .ab-tag--solid {

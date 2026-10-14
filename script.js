@@ -17,7 +17,7 @@ const colors = [
   "blue",
   "#FF69B4",
   "green",
-  "purple",
+  "#730fd6",
 ];
 
 cards.forEach((card, index) => {
