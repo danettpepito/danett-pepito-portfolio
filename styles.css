@@ -354,19 +354,12 @@ transition: transform 0.18s ease-out;
 will-change: transform;
 }
 
-.case-study:nth-child(1) .case-study-image {
+/* tilt alternates for any number of cards */
+.case-study:nth-child(odd) .case-study-image {
 transform: rotate(-1.3deg) scale(0.97);
 }
 
-.case-study:nth-child(2) .case-study-image {
-transform: rotate(1.3deg) scale(0.97);
-}
-
-.case-study:nth-child(3) .case-study-image {
-transform: rotate(-1.3deg) scale(0.97);
-}
-
-.case-study:nth-child(4) .case-study-image {
+.case-study:nth-child(even) .case-study-image {
 transform: rotate(1.3deg) scale(0.97);
 }
 
@@ -377,21 +370,40 @@ outline: 4px solid var(--dark);
 outline-offset: 4px;
 }
 
-/* different colours per case study */
-.case-study:nth-child(1):hover .case-study-image {
-outline-color: blue; /* rust */
+/* different colours per case study (by colour class, not position) */
+.case-blue:hover .case-study-image {
+outline-color: blue;
 }
 
-.case-study:nth-child(2):hover .case-study-image {
-outline-color: #FF69B4; /* teal */
+.case-pink:hover .case-study-image {
+outline-color: #FF69B4;
 }
 
-.case-study:nth-child(3):hover .case-study-image {
-outline-color: green; /* purple */
+.case-green:hover .case-study-image {
+outline-color: green;
 }
 
-.case-study:nth-child(4):hover .case-study-image {
+.case-orange:hover .case-study-image {
 outline-color: #730fd6; /* purple */
+}
+
+/* ── IN-PROGRESS CARD: grey hover colours ── */
+.case-study.case-wip:hover .case-study-image {
+outline-color: #888;
+}
+
+.case-study.case-wip:hover strong {
+color: #888;
+}
+
+/* ── IN-PROGRESS BADGE ── */
+.case-wip-badge {
+display: inline-block;
+margin-left: 8px;
+padding: 2px 10px;
+border: 1px solid currentColor;
+border-radius: 999px;
+font-size: 0.75rem;
 }
 
 .case-green:hover strong {
@@ -479,6 +491,10 @@ background: url("assets/outbox/image-9.jpg") center/cover no-repeat;
 
 .dataleak-image {
 background: url("assets/data-leak/data-leak.png") center/cover no-repeat;
+}
+
+.between-image {
+background: url("assets/between/image01-dvp.jpg") center/cover no-repeat;
 }
 
 /* SORTA.HTML */

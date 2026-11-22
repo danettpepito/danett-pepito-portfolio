@@ -13,18 +13,21 @@ window.addEventListener("scroll", () => {
 const cursor = document.querySelector(".cursor-label");
 const cards = document.querySelectorAll(".case-study");
 
-const colors = [
-  "blue",
-  "#FF69B4",
-  "green",
-  "#730fd6",
-];
+// cursor colour follows the card's colour class, not its position
+const colors = {
+  "case-blue": "blue",
+  "case-pink": "#FF69B4",
+  "case-green": "green",
+  "case-orange": "#730fd6",
+};
 
-cards.forEach((card, index) => {
+cards.forEach((card) => {
+  const colorClass = Object.keys(colors).find((c) => card.classList.contains(c));
+
   card.addEventListener("mouseenter", () => {
-    cursor.textContent = "Open Project";
+    cursor.textContent = card.dataset.cursor || "Open Project";
     cursor.style.opacity = 1;
-    cursor.style.background = colors[index];
+    cursor.style.background = colors[colorClass] || "black";
   });
 
   card.addEventListener("mouseleave", () => {
@@ -644,19 +647,20 @@ document.querySelectorAll('.ab-instinct-row').forEach(row => {
   });
 });
 
-cards.forEach((card, index) => {
+cards.forEach((card) => {
   const href = card.getAttribute("href") || card.querySelector("a")?.getAttribute("href");
   const isLocked = !href || href === "";
+  const colorClass = Object.keys(colors).find((c) => card.classList.contains(c));
 
   card.addEventListener("mouseenter", () => {
     if (isLocked) {
-      cursor.textContent = "🔒 Locked";
+      cursor.textContent = card.dataset.cursor || "🔒 Locked";
       cursor.style.opacity = 1;
       cursor.style.background = "#888";
     } else {
-      cursor.textContent = "Open Project";
+      cursor.textContent = card.dataset.cursor || "Open Project";
       cursor.style.opacity = 1;
-      cursor.style.background = colors[index];
+      cursor.style.background = colors[colorClass] || "black";
     }
   });
 
