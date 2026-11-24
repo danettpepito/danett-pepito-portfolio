@@ -2771,40 +2771,40 @@ cursor: default;
 transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.ab-tag--red {
-background: rgba(255, 59, 48, 0.12);
-border: 1.5px solid #ff3b30;
-color: #ff3b30;
+.ab-tag--lilac {
+background: #e8dff5;
+border: 1.5px solid #dacdee;
+color: #5d4a80;
 }
 
-.ab-tag--orange {
-background: rgba(255, 149, 0, 0.12);
-border: 1.5px solid #ff9500;
-color: #ff9500;
+.ab-tag--peach {
+background: #fde2d2;
+border: 1.5px solid #f7d0ba;
+color: #85492f;
 }
 
-.ab-tag--yellow {
-background: rgba(255, 204, 0, 0.12);
-border: 1.5px solid #ffcc00;
-color: #b8860b;
+.ab-tag--pistachio {
+background: #e3edcb;
+border: 1.5px solid #d2e0b2;
+color: #4f6130;
 }
 
-.ab-tag--green {
-background: rgba(52, 199, 89, 0.12);
-border: 1.5px solid #34c759;
-color: #34c759;
+.ab-tag--rose {
+background: #fadde6;
+border: 1.5px solid #f2c8d6;
+color: #863f5a;
 }
 
-.ab-tag--blue {
-background: rgba(0, 122, 255, 0.12);
-border: 1.5px solid #007aff;
-color: #007aff;
+.ab-tag--seafoam {
+background: #d3ece6;
+border: 1.5px solid #bcdfd6;
+color: #2b6158;
 }
 
-.ab-tag--purple {
-background: rgba(175, 82, 222, 0.12);
-border: 1.5px solid #730fd6;
-color: #730fd6;
+.ab-tag--periwinkle {
+background: #dde3f9;
+border: 1.5px solid #c9d2f2;
+color: #45528f;
 }
 
 .ab-tag--solid {
