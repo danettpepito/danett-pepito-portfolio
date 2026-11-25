@@ -330,16 +330,20 @@ const decodeEl  = document.getElementById("decode-word");
 const digitalEl = document.getElementById("digital-spaces");
 const popWords  = document.querySelectorAll(".pop-word");
 const typedEl   = document.getElementById("typed-text");
+const typedName = document.getElementById("typed-name");
 const cursorEl  = document.querySelector(".typed-cursor");
 
 function typeIn() {
   if (!typedEl) { runDecode(); return; }
-  const phrase = "Hey, I'm Danett";
+  const greeting = "Hey, I'm ";
+  const phrase = greeting + "Danett";
   let i = 0;
 
   function tick() {
     if (i < phrase.length) {
-      typedEl.textContent += phrase[i];
+      // the name types into its own span so only it gets crossed out on hover
+      const target = i >= greeting.length && typedName ? typedName : typedEl;
+      target.textContent += phrase[i];
       i++;
 
       // start decode halfway through typing
